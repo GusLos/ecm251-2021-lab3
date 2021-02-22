@@ -2,9 +2,10 @@
 Este repositório guarda os trabalhos e projetos da disciplina.
 
 # Desenvolvedor:
-## Gustavo Lourenço Losada
+- Gustavo Lourenço Losada
 
 # Linguagens e Frameworks:
 - Python
 - C
 - Java
+- Dart
