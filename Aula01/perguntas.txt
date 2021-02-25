@@ -1,0 +1,8 @@
+1.Onde está instalado o jdk?
+2.Qual é o caminho até o java e o javac?
+3.Como compilamos um programa em linha de comando?
+4.Como executamos esse programa?
+5.O que são variáveis de ambiente?
+6.como criar uma variável de ambiente?
+7.Como criar uma variável de ambiente?
+8.o que é o JAVA_HOME?
