@@ -1,7 +1,14 @@
 package losada.gustavo;
 
 public class Usuarios {
-    String nome;
-    String senha;
-    String eMail;
+    private String nome;
+    private String senha;
+    private String eMail;
+
+    public Usuarios(String nome, String senha, String eMail){
+        this.nome = nome;
+        this.senha = senha;
+        this.eMail = eMail;
+    }
+
 }
