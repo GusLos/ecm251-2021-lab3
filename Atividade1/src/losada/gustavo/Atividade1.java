@@ -24,7 +24,14 @@ public class Atividade1 {
                 this.continuarExecucao = false;
                 break;
             case 1:
-                System.out.println("Função não implementada");
+                System.out.println("Digite o nome do recebedor: ");
+                String nomeRecebedor = scanner.next();
+                System.out.println("Digite o valor que ele vai receber: ");
+                double valorPagamento = scanner.nextDouble();
+                System.out.println("Código QRcode: ");
+                int QRcode = scanner.nextInt();
+                String codigoTransacao = "0;"+nomeRecebedor+";"+valorPagamento+";"+QRcode;
+                System.out.println(codigoTransacao);
                 break;
             case 2:
                 System.out.println("Função não implementada");
