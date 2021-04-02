@@ -29,8 +29,8 @@ public class Atividade1 {
                 System.out.println("Digite o valor que ele vai receber: ");
                 double valorPagamento = scanner.nextDouble();
                 System.out.println("Código QRcode: ");
-                int QRcode = scanner.nextInt();
-                String codigoTransacao = "0;"+nomeRecebedor+";"+valorPagamento+";"+QRcode;
+                int qrCode = scanner.nextInt();
+                String codigoTransacao = "0;"+nomeRecebedor+";"+valorPagamento+";"+qrCode;
                 System.out.println(codigoTransacao);
                 break;
             case 2:
