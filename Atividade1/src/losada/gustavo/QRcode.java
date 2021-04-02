@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class QRcode {
 
-    public String gerarQRcode(int id, String nome, double valor){
+    public static String gerarQRcode(int id, String nome, double valor){
         return id + ";" + nome + ";" + valor + ";" + getRandomNumberInRange(1000,9999);
     }
 

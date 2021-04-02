@@ -14,4 +14,13 @@ public class Contas {
     public double getSaldo(){
         return this.saldo;
     }
+
+    public int getIdConta(){
+        return this.idConta;
+    }
+
+    public String getNome(){
+        return this.usuario.getNome();
+    }
+
 }

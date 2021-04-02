@@ -11,4 +11,8 @@ public class Usuarios {
         this.eMail = eMail;
     }
 
+    public String getNome(){
+        return this.nome;
+    }
+
 }

@@ -16,6 +16,7 @@ public class Atividade1 {
         c1 = new Contas(1,1000,"max@uol.com","123","Max");
         c2 = new Contas(2,250,"mel@uol.com","321","Mel");
         c3 = new Contas(3,3000,"Stla@uol.com","231","Stella");
+        conta = c1;
     }
 
     public void executar(){
@@ -41,13 +42,10 @@ public class Atividade1 {
 
                 break;
             case 2:
-                System.out.println("Digite seu nome");
-                nomeRecebedor = scanner.next();
                 System.out.println("Digite o valor que vai receber: ");
                 valorPagamento = scanner.nextDouble();
-                //String codigo = qrCode.gerarQRcode(0,nomeRecebedor,valorPagamento);
                 // Precisa gravar o código para comparação ?
-                System.out.println(qrCode.gerarQRcode(0,nomeRecebedor,valorPagamento));
+                System.out.println(QRcode.gerarQRcode(conta.getIdConta(),conta.getNome(),valorPagamento));
                 break;
             case 8:
                 System.out.println("Saldo: R$"+this.conta.getSaldo());
