@@ -19,7 +19,5 @@ public class Transacoes {
         }
     }
 
-    public static void retirarValor (Contas conta){
-        //a
-    }
+
 }

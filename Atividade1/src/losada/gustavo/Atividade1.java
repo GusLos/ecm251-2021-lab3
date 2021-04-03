@@ -60,6 +60,11 @@ public class Atividade1 {
                     System.out.println("Falha na operação");
                 }
                 break;
+            case 4:
+                System.out.println("Valor para depositar:");
+                String valorAdicionar = scanner.next();
+                this.conta.adicionarValor(valorAdicionar);
+                break;
             case 8:
                 System.out.println("Saldo: R$"+this.conta.getSaldo());
                 break;
@@ -77,6 +82,7 @@ public class Atividade1 {
         System.out.println("1 - Pagar");
         System.out.println("2 - Receber");
         System.out.println("3 - Sacar");
+        System.out.println("4 - Depositar");
         System.out.println("8 - Ver saldo");
         System.out.println("9 - Trocar conta");
         System.out.println("0 - Fim");

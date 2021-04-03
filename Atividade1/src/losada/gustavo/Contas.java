@@ -42,6 +42,11 @@ public class Contas {
         }
     }
 
+    public void adicionarValor(String valor){
+        double valorDouble = Double.valueOf(valor).doubleValue();
+        this.saldo += valorDouble;
+    }
+
     public static Contas conectarConta(String id){
         int idInt = Integer.parseInt(id);
         if (idInt == 1){
