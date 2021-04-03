@@ -54,7 +54,12 @@ public class Atividade1 {
             case 3:
                 System.out.println("Digite valor para sacar");
                 String valorSacar = scanner.next();
-                System.out.println(conta.saldoPositivo(valorSacar));
+                if(conta.saldoPositivo(valorSacar)){
+                    System.out.println("Operação realizada com sucesso");
+                }else{
+                    System.out.println("Falha na operação");
+                }
+                break;
             case 8:
                 System.out.println("Saldo: R$"+this.conta.getSaldo());
                 break;
@@ -71,7 +76,7 @@ public class Atividade1 {
         System.out.println("Menu:");
         System.out.println("1 - Pagar");
         System.out.println("2 - Receber");
-        System.out.println("3 - 'sacar'(teste)");
+        System.out.println("3 - Sacar");
         System.out.println("8 - Ver saldo");
         System.out.println("9 - Trocar conta");
         System.out.println("0 - Fim");

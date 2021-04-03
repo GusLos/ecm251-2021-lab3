@@ -33,11 +33,23 @@ public class Contas {
     /* Integer.parseInt() --> aprendi/colei de https://dicasdejava.com.br/java-como-converter-string-para-int/ */
 
     public boolean saldoPositivo(String valor){
-        int valorInt = Integer.parseInt(valor);
-        if(this.saldo >= valorInt){
+        double valorDouble = Double.valueOf(valor).doubleValue();
+        if(this.saldo >= valorDouble){
+            this.saldo -= valorDouble;
             return true;
         }else{
             return false;
+        }
+    }
+
+    public static Contas conectarConta(String id){
+        int idInt = Integer.parseInt(id);
+        if (idInt == 1){
+            return c1;
+        } else if (idInt == 2){
+            return c2;
+        }else {
+            return c3;
         }
     }
 
@@ -57,5 +69,7 @@ public class Contas {
         }
         return conta;
     }
+
+
 
 }
