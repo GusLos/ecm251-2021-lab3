@@ -68,6 +68,9 @@ public class Atividade1 {
                 valorPagamento = scanner.next();
                 System.out.println(QRcode.gerarQRcode(conta.getIdConta(),conta.usuario.getNome(),valorPagamento));
                 break;
+            case 8:
+                System.out.println(conta.toString());
+                break;
             case 9:
                 this.conta = Contas.login();
                 break;
@@ -85,6 +88,7 @@ public class Atividade1 {
         System.out.println("3 - Depositar");
         System.out.println("4 - Pagar");
         System.out.println("5 - Receber");
+        System.out.println("8 - Informação da conta [toString]");
         System.out.println("9 - Trocar conta");//
     }
 }

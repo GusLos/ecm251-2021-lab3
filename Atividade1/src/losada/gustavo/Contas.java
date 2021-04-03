@@ -73,6 +73,12 @@ public class Contas {
         return conta;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Contas{" +
+                "idConta=" + idConta +
+                ", saldo=" + saldo +
+                ", usuario=" + usuario +
+                '}';
+    }
 }

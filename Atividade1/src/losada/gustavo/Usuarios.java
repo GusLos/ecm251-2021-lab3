@@ -17,5 +17,12 @@ public class Usuarios {
 
     public String getSenha() { return this.senha; }
 
-
+    @Override
+    public String toString() {
+        return "Usuarios{" +
+                "nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", eMail='" + eMail + '\'' +
+                '}';
+    }
 }
