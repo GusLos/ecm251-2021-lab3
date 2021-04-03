@@ -59,7 +59,8 @@ public class Contas {
         String senha = "0";
         Contas conta = conectarConta("1");
         while(conta.usuario.getSenha().intern() != senha.intern()){
-            System.out.println("Escolher conta: (1) - Max, (2) - Mel ou (3) - Stella");
+            //Pode colocar um contador i para passar por todos os IDs e ir apresentando os dados
+            System.out.println("Escolher conta: (1) - Max[123], (2) - Mel[321] ou (3) - Stella[231]");
             String op = scanner.next();
             System.out.println("Digite a senha da conta:");
             senha = scanner.next();
