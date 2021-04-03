@@ -19,7 +19,7 @@ public class Atividade1 {
     }
 
     public void executar(){
-        conta = Contas.login(this.conta);
+        this.conta = Contas.login();
         while(continuarExecucao) {
             exibirMenu();
             int opcao = scanner.nextInt();
@@ -49,7 +49,7 @@ public class Atividade1 {
                 System.out.println("Digite o valor que vai receber: ");
                 valorPagamento = scanner.next();
                 // Precisa gravar o código para comparação ?
-                System.out.println(QRcode.gerarQRcode(conta.getIdConta(),conta.getNome(),valorPagamento));
+                System.out.println(QRcode.gerarQRcode(conta.getIdConta(),conta.usuario.getNome(),valorPagamento));
                 break;
             case 3:
                 System.out.println("Digite valor para sacar");
@@ -69,7 +69,7 @@ public class Atividade1 {
                 System.out.println("Saldo: R$"+this.conta.getSaldo());
                 break;
             case 9:
-                conta = Contas.login(this.conta);
+                this.conta = Contas.login();
                 break;
             default :
                 System.out.println("Opção invalida");

@@ -6,7 +6,7 @@ public class Contas {
     private static Scanner scanner;
     private int idConta;
     private double saldo;
-    private Usuarios usuario;
+    public Usuarios usuario;
     private static Contas c1 = new Contas(1,1000,"max@uol.com","123","Max");
     private static Contas c2 = new Contas(2,250,"mel@uol.com","321","Mel");
     private static Contas c3 = new Contas(3,3000,"Stla@uol.com","231","Stella");
@@ -14,7 +14,7 @@ public class Contas {
     public Contas(int idConta, double saldo, String eMail, String senha, String nome){
         this.idConta = idConta;
         this.saldo = saldo;
-        this.usuario = new Usuarios(nome);
+        this.usuario = new Usuarios(nome, senha, eMail);
         this.scanner = new Scanner(System.in);
     }
 
@@ -24,10 +24,6 @@ public class Contas {
 
     public int getIdConta(){
         return this.idConta;
-    }
-
-    public String getNome(){
-        return this.usuario.getNome();
     }
 
     public boolean saldoPositivo(String valor){
@@ -58,20 +54,21 @@ public class Contas {
         }
     }
 
-    public static Contas login (Contas conta){
+    public static Contas login (){
         scanner = new Scanner(System.in);
-        System.out.println("Escolher conta: c(1), c(2) ou c(3)");
-        int op = scanner.nextInt();
-        if (op == 1){
-            conta = c1;
-            System.out.println("Logando com c1");
-        } else if (op == 2){
-            conta = c2;
-            System.out.println("Logando com c2");
-        }else {
-            conta = c3;
-            System.out.println("Logando com c3");
+        String senha = "0";
+        Contas conta = conectarConta("1");
+        while(conta.usuario.getSenha().intern() != senha.intern()){
+            System.out.println("Escolher conta: (1) - Max, (2) - Mel ou (3) - Stella");
+            String op = scanner.next();
+            System.out.println("Digite a senha da conta:");
+            senha = scanner.next();
+            conta = conectarConta(op);
+            if(conta.usuario.getSenha().intern() != senha.intern()){
+                System.out.println("ID da conta ou senha errado.");
+            }
         }
+        System.out.println("Logado como "+ conta.usuario.getNome());
         return conta;
     }
 
