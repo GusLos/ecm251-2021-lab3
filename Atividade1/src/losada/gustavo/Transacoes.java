@@ -9,6 +9,7 @@ public class Transacoes {
         if ((informacao[1].intern() == nome.intern()) && (informacao[2].intern() == valor.intern()) && conta.saldoPositivo(valor)){
             //conectar a conta e realizar a transferencia
             Contas contaRecebedor = Contas.conectarConta(informacao[0]);
+            contaRecebedor.adicionarValor(informacao[2]);
             return true;
         }else if (!conta.saldoPositivo(valor)){
             System.out.println("Quantia de dineiro indisponivel");

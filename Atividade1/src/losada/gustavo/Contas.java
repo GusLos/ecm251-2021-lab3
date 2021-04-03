@@ -30,8 +30,6 @@ public class Contas {
         return this.usuario.getNome();
     }
 
-    /* Integer.parseInt() --> aprendi/colei de https://dicasdejava.com.br/java-como-converter-string-para-int/ */
-
     public boolean saldoPositivo(String valor){
         double valorDouble = Double.valueOf(valor).doubleValue();
         if(this.saldo >= valorDouble){
@@ -46,6 +44,8 @@ public class Contas {
         double valorDouble = Double.valueOf(valor).doubleValue();
         this.saldo += valorDouble;
     }
+
+    /* Integer.parseInt() --> aprendi/colei de https://dicasdejava.com.br/java-como-converter-string-para-int/ */
 
     public static Contas conectarConta(String id){
         int idInt = Integer.parseInt(id);
