@@ -27,6 +27,7 @@ public class TesteDrive {
         membros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
         System.out.println("-------------------------------------------");
         membros.forEach(pessoa -> pessoa.assinaMensagem(horario));
+        /*
         int id = 0;
         try{
             id = membros.getFirst().getId();
@@ -35,5 +36,10 @@ public class TesteDrive {
             id = 0;
         }
         System.out.println(id);
+        */
+        System.out.println("-------------------------------------------");
+        membros.remove(1);
+        membros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
+        System.out.println("-------------------------------------------");
     }
 }

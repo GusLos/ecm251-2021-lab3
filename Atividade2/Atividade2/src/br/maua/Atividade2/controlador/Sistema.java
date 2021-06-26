@@ -3,6 +3,7 @@ package br.maua.Atividade2.controlador;
 import br.maua.Atividade2.enums.HorarioSistema;
 import br.maua.Atividade2.models.*;
 
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -33,7 +34,12 @@ public class Sistema {
         int opcao = 1;
         registrarMembro();
         while(opcao != 0){
+            //try{
             opcao = menu();
+            //}
+            //catch (InputMismatchException e){
+            //    opcao = 999;
+            //}
             analisarOpcao(opcao);
         }
     }
@@ -56,7 +62,16 @@ public class Sistema {
         System.out.println("5 - Adicionar membro;");
         //
         System.out.println("6 - Visualizar todos os membros cadastrados;");
+        System.out.println("7 - Visualizar mensagem de todos os membros cadastrados;");
+        System.out.println("8 - Remover um membro;");
+
+        //try{
         opcao = scanner.nextInt();
+        //}
+        //catch (InputMismatchException e){
+        //    System.out.println("Tu é cego ?");
+        //    opcao = 999;
+        //}
         return opcao;
     }
 
@@ -77,10 +92,10 @@ public class Sistema {
                 System.out.println("Horario mudado com sucesso para: "+horario.horarioAtual());
                 break;
             case 3:
-                bigBrother.assinaMensagem(horario);
+                listaMembro.getFirst().assinaMensagem(horario);
                 break;
             case 4:
-                System.out.println(bigBrother.apresentar());
+                System.out.println(listaMembro.getFirst().apresentar());
                 break;
             case 5:
                 registrarMembro();
@@ -88,8 +103,15 @@ public class Sistema {
             case 6:
                 mostrarMembros();
                 break;
+            case 7:
+                postarMensagensMembros();
+                break;
+            case 8:
+                removerMembro();
+                break;
             default:
                 System.out.println("Opção invalida.");
+                break;
         }
     }
 
@@ -143,7 +165,15 @@ public class Sistema {
         }
     }
 
-    private void postarMensagem(){}
+    /**
+     * Método que permite todos os membros cadastrados (presentes em listaMembros)
+     * postar/assinar a sua mensagem, de acordo com sua classe e método assinaMensagem().
+     */
+    private void postarMensagensMembros(){
+        System.out.println();
+        listaMembro.forEach(usuario -> usuario.assinaMensagem(horario));
+        System.out.println();
+    }
 
     /**
      * Esse método mostra todos os membros que estão cadastrados no sistema
@@ -154,6 +184,25 @@ public class Sistema {
         System.out.println();
         this.listaMembro.forEach(usuario -> System.out.println(usuario.apresentar()));
         System.out.println();
+    }
+
+    /**
+     * Método que permite remover um membro cadastrado (presente na listaMembros).
+     */
+    private void removerMembro(){
+        int i = -1;
+        System.out.println("ID do membro a ser removido, (0 para voltar):");
+        i = scanner.nextInt();
+        while((i < 0) || (i > listaMembro.getLast().getId())){
+            if(i == 0){
+                return;
+            }
+            System.out.println("ID invalido, se quiser volte ao menu (0) e " +
+                    "veja lista de membros (6).");
+            System.out.println("ID do membro a ser removido, (0 para voltar):");
+            i = scanner.nextInt();
+        }
+        listaMembro.remove(i);
     }
 
 }

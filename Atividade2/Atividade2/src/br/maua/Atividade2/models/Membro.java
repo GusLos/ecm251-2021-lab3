@@ -62,4 +62,5 @@ public class Membro implements PostarMensagem, Apresentacao {
     public int getId(){
         return this.id;
     }
+
 }
