@@ -18,6 +18,12 @@ public abstract class Membros implements PostarMensagem, Apresentacao {
     protected String eMail;
     protected TiposMembros funcao;
 
+    /**
+     * Construtor da classe Membros.
+     * @param nome
+     * @param eMail
+     * @param funcao
+     */
     public Membros (String nome, String eMail, TiposMembros funcao){
         this.nome = nome;
         this.eMail = eMail;

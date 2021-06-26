@@ -6,17 +6,26 @@ import losada.gustavo.models.Membro;
 
 import java.util.Scanner;
 
+/**
+ * Classe que faz todas as interações.
+ */
 public class Sistema {
     private static SistemaHorario horario;
     private Scanner scanner;
     private Membro membro;
 
+    /**
+     * Construtor de sistema, prepara a classe sistema para ser utilizada.
+     */
     public Sistema(){
         this.horario = new SistemaHorario(HorarioSistema.NORMAL);
         this.scanner = new Scanner(System.in);
         this.membro = new Membro("G","G@H.com", TiposMembros.BIG_BROTHERS);
     }
 
+    /**
+     * Método que permite o sistema funcionar.
+     */
     public void run(){
         int opcao = 1;
         while(opcao != 0){

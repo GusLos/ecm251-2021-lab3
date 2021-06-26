@@ -2,9 +2,16 @@ package losada.gustavo.controlador;
 
 import losada.gustavo.enums.HorarioSistema;
 
+/**
+ * Classe que realiza toda interação com horario (HorarioSistema).
+ */
 public class SistemaHorario {
     private static HorarioSistema horario;
 
+    /**
+     * Construtor da classe que permite inicializa-la em NORMAL ou EXTRA.
+     * @param horario
+     */
     public SistemaHorario(HorarioSistema horario){
         this.horario = horario;
     }
