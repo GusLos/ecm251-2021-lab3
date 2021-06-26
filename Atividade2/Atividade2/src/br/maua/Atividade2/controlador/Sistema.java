@@ -54,7 +54,8 @@ public class Sistema {
         System.out.println("4 - Apresentar usuário atual;");
         //fazer if usuario é big brother ?
         System.out.println("5 - Adicionar membro;");
-        System.out.println("");
+        //
+        System.out.println("6 - Visualizar todos os membros cadastrados;");
         opcao = scanner.nextInt();
         return opcao;
     }
@@ -84,6 +85,9 @@ public class Sistema {
             case 5:
                 registrarMembro();
                 break;
+            case 6:
+                mostrarMembros();
+                break;
             default:
                 System.out.println("Opção invalida.");
         }
@@ -91,6 +95,9 @@ public class Sistema {
 
     /**
      * Método para registrar novos membros na lista ligada existente no sistema.
+     * Caso não tenha ninguém cadastrado (presente em listaMembros), conta como um
+     * "LogIn", onde o usuário que entrar no sistema e usar o sistema vai ser
+     * marcado com id = 0 e será o primeiro da lista listaMembros.
      */
     private void registrarMembro(){
         String nomeMembroNovo = "";
@@ -112,7 +119,7 @@ public class Sistema {
         }
         int id = 0;
         try{
-            listaMembro.getLast().getId();
+            id = this.listaMembro.getLast().getId();
         }
         catch (NoSuchElementException e){
             id = -1;
@@ -120,16 +127,16 @@ public class Sistema {
         id ++;
         switch (tipoMembro){
             case 0:
-                listaMembro.add(new BigBrothers(nomeMembroNovo,eMailMembroNovo,10));
+                this.listaMembro.add(new BigBrothers(nomeMembroNovo,eMailMembroNovo,id));
                 break;
             case 1:
-                listaMembro.add(new ScriptGuys(nomeMembroNovo,eMailMembroNovo,10));
+                this.listaMembro.add(new ScriptGuys(nomeMembroNovo,eMailMembroNovo,id));
                 break;
             case 2:
-                listaMembro.add(new HeavyLifters(nomeMembroNovo,eMailMembroNovo,10));
+                this.listaMembro.add(new HeavyLifters(nomeMembroNovo,eMailMembroNovo,id));
                 break;
             case 3:
-                listaMembro.add(new MobileMembers(nomeMembroNovo,eMailMembroNovo,10));
+                this.listaMembro.add(new MobileMembers(nomeMembroNovo,eMailMembroNovo,id));
                 break;
             default:
                 System.out.println("Erro!");
@@ -137,5 +144,16 @@ public class Sistema {
     }
 
     private void postarMensagem(){}
+
+    /**
+     * Esse método mostra todos os membros que estão cadastrados no sistema
+     * (membros presentes em listaMembro).
+     * Faz uso do método apresentacao() de Membro.
+     */
+    private void mostrarMembros(){
+        System.out.println();
+        this.listaMembro.forEach(usuario -> System.out.println(usuario.apresentar()));
+        System.out.println();
+    }
 
 }
