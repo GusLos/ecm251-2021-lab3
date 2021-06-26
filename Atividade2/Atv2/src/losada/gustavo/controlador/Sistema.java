@@ -1,9 +1,9 @@
 package losada.gustavo.controlador;
 
 import losada.gustavo.enums.HorarioSistema;
-import losada.gustavo.enums.TiposMembros;
-import losada.gustavo.models.BigBrothers;
+import losada.gustavo.models.*;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -13,11 +13,13 @@ public class Sistema {
     private static SistemaHorario horario;
     private Scanner scanner;
     private BigBrothers bigBrother;
+    private LinkedList<Membro> listaMembro;
 
     /**
      * Construtor de sistema, prepara a classe sistema para ser utilizada.
      */
     public Sistema(){
+        this.listaMembro = new LinkedList<>();
         this.horario = new SistemaHorario(HorarioSistema.NORMAL);
         this.scanner = new Scanner(System.in);
         this.bigBrother = new BigBrothers("G","G@H.com",00);
@@ -28,6 +30,7 @@ public class Sistema {
      */
     public void run(){
         int opcao = 1;
+        registrarMembro();
         while(opcao != 0){
             opcao = menu();
             analisarOpcao(opcao);
@@ -39,7 +42,7 @@ public class Sistema {
      * @return int op, sendo op a opção de acordo com o menu apresentado.
      */
     private int menu(){
-        int op = 1;
+        int opcao = 1;
         System.out.println("Bem vindo\t\t\t\tHorario atual: "+horario.horarioAtual());
         System.out.println();
         System.out.println("Escolha sua ação:");
@@ -48,8 +51,11 @@ public class Sistema {
         System.out.println("2 - Mudar horário atual;");
         System.out.println("3 - Postar/Assinar mensagem;");
         System.out.println("4 - Apresentar usuário atual;");
-        op = scanner.nextInt();
-        return op;
+        //fazer if usuario é big brother ?
+        System.out.println("5 - Adicionar membro;");
+        System.out.println("");
+        opcao = scanner.nextInt();
+        return opcao;
     }
 
     /**
@@ -74,12 +80,53 @@ public class Sistema {
             case 4:
                 System.out.println(bigBrother.apresentar());
                 break;
+            case 5:
+                registrarMembro();
+                break;
             default:
                 System.out.println("Opção invalida.");
         }
     }
 
-    private void registrarMembro(){}
+    /**
+     * Método para registrar novos membros na lista ligada existente no sistema.
+     */
+    private void registrarMembro(){
+        String nomeMembroNovo = "";
+        String eMailMembroNovo = "";
+        int tipoMembro = -1;
+        System.out.println("Nome: ");
+        nomeMembroNovo = scanner.next();
+        System.out.println("E-mail:");
+        eMailMembroNovo = scanner.next();
+        //Algum jeito melhor de fazer isso ?
+        System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
+                "3 - Mobile Member");
+        tipoMembro = scanner.nextInt();
+        while((tipoMembro < 0) || (tipoMembro > 3)){
+            System.out.println("Número invalido.");
+            System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
+                    "3 - Mobile Member");
+            tipoMembro = scanner.nextInt();
+        }
+        switch (tipoMembro){
+            case 0:
+                listaMembro.add(new BigBrothers(nomeMembroNovo,eMailMembroNovo,10));
+                break;
+            case 1:
+                listaMembro.add(new ScriptGuys(nomeMembroNovo,eMailMembroNovo,10));
+                break;
+            case 2:
+                listaMembro.add(new HeavyLifters(nomeMembroNovo,eMailMembroNovo,10));
+                break;
+            case 3:
+                listaMembro.add(new MobileMembers(nomeMembroNovo,eMailMembroNovo,10));
+                break;
+            default:
+                System.out.println("Erro!");
+        }
+    }
+
 
     private void postarMensagem(){}
 
