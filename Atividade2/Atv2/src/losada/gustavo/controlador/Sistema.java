@@ -20,19 +20,56 @@ public class Sistema {
     public void run(){
         boolean op = true;
         while(op){
-            System.out.println("Bem vindo.");
-            System.out.println(membro.apresentar());
+            System.out.println(horario);
+            System.out.println(horarioEhNormal());
+            System.out.println("---------------------------");
+            mudarHorario();
+            System.out.println(horarioEhNormal());
+            System.out.println(horario);
             op = false;
         }
     }
 
+    private void menu(){
+        
+    }
+
     private void registrarMembro(){}
 
-    private void horarioAtual(){}
+    /**
+     * Método deixa o horário mais apresentavel.
+     * @return Se horário do sistema está em NORMAL, retorna String "Normal", se não String "Extra".
+     */
+    private String horarioAtual(){
+        if (horarioEhNormal()){
+            return "Normal";
+        }
+        else{
+            return "'Extra'";
+        }
+    }
 
     private void postarMensagem(){}
 
-    private void mudarHorario(){}
+    /**
+     * Método que é usado para mudar o harário do sistema.
+     * De NORMAL para EXTRA, ou de EXTRA para NORMAL.
+     */
+    private void mudarHorario(){
+        if (horarioEhNormal()){
+            this.horario = HorarioSistema.EXTRA;
+        }
+        else{
+            this.horario = HorarioSistema.NORMAL;
+        }
+    }
 
+    /**
+     * Método verifica se o horário do sistema está atualmente como NORMAl.
+     * @return Se horário (do sistema) estiver em (==) NORMAL, retorna true, se não false.
+     */
+    private boolean horarioEhNormal(){
+        return this.horario == HorarioSistema.NORMAL;
+    }
 
 }
