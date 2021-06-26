@@ -2,7 +2,7 @@ package losada.gustavo.controlador;
 
 import losada.gustavo.enums.HorarioSistema;
 import losada.gustavo.enums.TiposMembros;
-import losada.gustavo.models.Membro;
+import losada.gustavo.models.BigBrother;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Sistema {
     private static SistemaHorario horario;
     private Scanner scanner;
-    private Membro membro;
+    private BigBrother bigBrother;
 
     /**
      * Construtor de sistema, prepara a classe sistema para ser utilizada.
@@ -20,7 +20,7 @@ public class Sistema {
     public Sistema(){
         this.horario = new SistemaHorario(HorarioSistema.NORMAL);
         this.scanner = new Scanner(System.in);
-        this.membro = new Membro("G","G@H.com", TiposMembros.BIG_BROTHERS);
+        this.bigBrother = new BigBrother("G","G@H.com", TiposMembros.BIG_BROTHERS,00);
     }
 
     /**
@@ -47,6 +47,7 @@ public class Sistema {
         System.out.println("1 - Verificar horário atual;");
         System.out.println("2 - Mudar horário atual;");
         System.out.println("3 - Postar/Assinar mensagem;");
+        System.out.println("4 - Apresentar usuário atual;");
         op = scanner.nextInt();
         return op;
     }
@@ -68,7 +69,10 @@ public class Sistema {
                 System.out.println("Horario mudado com sucesso para: "+horario.horarioAtual());
                 break;
             case 3:
-                membro.assinaMensagem(horario);
+                bigBrother.assinaMensagem(horario);
+                break;
+            case 4:
+                System.out.println(bigBrother.apresentar());
                 break;
             default:
                 System.out.println("Opção invalida.");
