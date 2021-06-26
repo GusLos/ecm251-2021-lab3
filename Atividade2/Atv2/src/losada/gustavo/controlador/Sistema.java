@@ -2,7 +2,7 @@ package losada.gustavo.controlador;
 
 import losada.gustavo.enums.HorarioSistema;
 import losada.gustavo.enums.TiposMembros;
-import losada.gustavo.models.BigBrother;
+import losada.gustavo.models.BigBrothers;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Sistema {
     private static SistemaHorario horario;
     private Scanner scanner;
-    private BigBrother bigBrother;
+    private BigBrothers bigBrother;
 
     /**
      * Construtor de sistema, prepara a classe sistema para ser utilizada.
@@ -20,7 +20,7 @@ public class Sistema {
     public Sistema(){
         this.horario = new SistemaHorario(HorarioSistema.NORMAL);
         this.scanner = new Scanner(System.in);
-        this.bigBrother = new BigBrother("G","G@H.com", TiposMembros.BIG_BROTHERS,00);
+        this.bigBrother = new BigBrothers("G","G@H.com",00);
     }
 
     /**
