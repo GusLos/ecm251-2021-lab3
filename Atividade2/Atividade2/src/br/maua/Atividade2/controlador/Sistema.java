@@ -4,6 +4,7 @@ import br.maua.Atividade2.enums.HorarioSistema;
 import br.maua.Atividade2.models.*;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -110,7 +111,13 @@ public class Sistema {
             tipoMembro = scanner.nextInt();
         }
         int id = 0;
-        id = listaMembro.getLast().getId();
+        try{
+            listaMembro.getLast().getId();
+        }
+        catch (NoSuchElementException e){
+            id = -1;
+        }
+        id ++;
         switch (tipoMembro){
             case 0:
                 listaMembro.add(new BigBrothers(nomeMembroNovo,eMailMembroNovo,10));

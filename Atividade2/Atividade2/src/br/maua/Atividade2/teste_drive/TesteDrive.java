@@ -5,6 +5,7 @@ import br.maua.Atividade2.enums.HorarioSistema;
 import br.maua.Atividade2.models.*;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 /**
  * Classe para testar ideias antes de implementar.
@@ -18,7 +19,7 @@ public class TesteDrive {
         membros.add(new HeavyLifters("Max","Max@gmail.com", 01));
         membros.add(new ScriptGuys("Mel","Mel@gmail.com", 02));
         membros.add(new MobileMembers("Stella","Stella@gmail.com",03));
-        membros.add(new BigBrothers("G","G@M.com",00));
+        membros.add(new BigBrothers("G","G@M.com",05));
 
 
         System.out.println("-------------------------------------------");
@@ -26,8 +27,13 @@ public class TesteDrive {
         membros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
         System.out.println("-------------------------------------------");
         membros.forEach(pessoa -> pessoa.assinaMensagem(horario));
-
-        int id = membros.getFirst().getId();
+        int id = 0;
+        try{
+            id = membros.getFirst().getId();
+        }
+        catch(NoSuchElementException e){
+            id = 0;
+        }
         System.out.println(id);
     }
 }
