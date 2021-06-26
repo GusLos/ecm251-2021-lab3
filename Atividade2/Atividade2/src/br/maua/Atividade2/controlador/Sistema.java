@@ -14,7 +14,6 @@ import java.util.Scanner;
 public class Sistema {
     private static SistemaHorario horario;
     private Scanner scanner;
-    private BigBrothers bigBrother;
     private LinkedList<Membro> listaMembro;
 
     /**
@@ -24,7 +23,6 @@ public class Sistema {
         this.listaMembro = new LinkedList<>();
         this.horario = new SistemaHorario(HorarioSistema.NORMAL);
         this.scanner = new Scanner(System.in);
-        this.bigBrother = new BigBrothers("G","G@H.com",00);
     }
 
     /**
@@ -61,7 +59,7 @@ public class Sistema {
         //fazer if usuario é big brother ?
         System.out.println("5 - Adicionar membro;");
         //
-        System.out.println("6 - Visualizar todos os membros cadastrados;");
+        System.out.println("6 - Visualizar todos os membros cadastrados (Relatorio);");
         System.out.println("7 - Visualizar mensagem de todos os membros cadastrados;");
         System.out.println("8 - Remover um membro;");
 
@@ -101,7 +99,7 @@ public class Sistema {
                 registrarMembro();
                 break;
             case 6:
-                mostrarMembros();
+                relatorio();
                 break;
             case 7:
                 postarMensagensMembros();
@@ -180,7 +178,7 @@ public class Sistema {
      * (membros presentes em listaMembro).
      * Faz uso do método apresentacao() de Membro.
      */
-    private void mostrarMembros(){
+    private void relatorio(){
         System.out.println();
         this.listaMembro.forEach(usuario -> System.out.println(usuario.apresentar()));
         System.out.println();
