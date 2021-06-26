@@ -194,15 +194,14 @@ public class Sistema {
         System.out.println("ID do membro a ser removido, (0 para voltar):");
         i = scanner.nextInt();
         while((i < 0) || (i > listaMembro.getLast().getId())){
-            if(i == 0){
-                return;
-            }
             System.out.println("ID invalido, se quiser volte ao menu (0) e " +
-                    "veja lista de membros (6).");
+                    "ver lista de membros (6) ...");
             System.out.println("ID do membro a ser removido, (0 para voltar):");
             i = scanner.nextInt();
         }
-        listaMembro.remove(i);
+        if(i != 0){
+            listaMembro.remove(i);
+        }
     }
 
 }
