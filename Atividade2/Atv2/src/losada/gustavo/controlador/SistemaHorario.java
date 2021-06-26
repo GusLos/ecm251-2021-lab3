@@ -33,7 +33,7 @@ public class SistemaHorario {
      * Método verifica se o horário do sistema está atualmente como NORMAl.
      * @return Se horário (do sistema) estiver em (==) NORMAL, retorna true, se não false.
      */
-    private boolean horarioEhNormal(){
+    public boolean horarioEhNormal(){
         return this.horario == HorarioSistema.NORMAL;
     }
 

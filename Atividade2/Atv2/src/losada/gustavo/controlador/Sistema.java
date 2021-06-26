@@ -46,6 +46,7 @@ public class Sistema {
         System.out.println("0 - Sair do sistema;");
         System.out.println("1 - Verificar horário atual;");
         System.out.println("2 - Mudar horário atual;");
+        System.out.println("3 - Postar/Assinar mensagem;");
         op = scanner.nextInt();
         return op;
     }
@@ -65,6 +66,9 @@ public class Sistema {
             case 2:
                 horario.mudarHorario();
                 System.out.println("Horario mudado com sucesso para: "+horario.horarioAtual());
+                break;
+            case 3:
+                membro.assinaMensagem(horario);
                 break;
             default:
                 System.out.println("Opção invalida.");
