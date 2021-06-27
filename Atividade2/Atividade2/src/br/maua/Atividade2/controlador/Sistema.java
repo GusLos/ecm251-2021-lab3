@@ -63,6 +63,9 @@ public class Sistema {
             //    opcao = 999;
             //}
             analisarOpcao(opcao);
+            if(opcao == 9){
+                opcao = 0;
+            }
         }
     }
 
@@ -85,7 +88,7 @@ public class Sistema {
         System.out.println("6 - Visualizar todos os membros cadastrados (Relatorio);");
         System.out.println("7 - Visualizar mensagem de todos os membros cadastrados;");
         System.out.println("8 - Remover um membro;");
-        System.out.println("9 - Salvar membros atuais em um arquivo;");
+        System.out.println("9 - Salvar membros atuais em um arquivo e sair;");
 
         //try{
         opcao = scanner.nextInt();
@@ -132,7 +135,7 @@ public class Sistema {
                 removerMembro(treeMembro);
                 break;
             case 9:
-                salvarDados();
+                salvarDados(treeMembro);
                 break;
             default:
                 System.out.println("Opção invalida.");
@@ -343,13 +346,18 @@ public class Sistema {
      */
     private void removerMembro(Set<Membro> treeMembro){
         int id = -1;
+        System.out.println("Digite o ID membro (0 para sair): ");
+        id = scanner.nextInt();
         while (idExistenteTree(id)){
-            System.out.println("ID invalido, talvez queira voltar ao menu(0) e verificar a lista(6).");
-            System.out.println("Digite o ID membro: ");
-            id = scanner.nextInt();
             if(id == 0){
                 return;
             }
+            System.out.println("ID invalido, talvez queira voltar ao menu(0) e verificar a lista(6).");
+            System.out.println("Digite o ID membro: ");
+            id = scanner.nextInt();
+        }
+        if(id == 0){
+            return;
         }
         int finalId = id;
         treeMembro.removeIf(membro -> (membro.getId() == finalId));
@@ -378,13 +386,82 @@ public class Sistema {
 
     /**
      * Método de sistema que permite salvar os membros atuais em um arquivo.
+     * @param listaMembro LinkedList de Membro com membros do sistema.
      */
-    private void salvarDados(){
+    private void salvarDados(LinkedList<Membro> listaMembro){
         organizarLista();
         listaMembro.getFirst().setId(listaMembro.getLast().getId()+1);
         LeituraArquivoMembro.salvar(listaMembro,this.file);
         listaMembro.getLast().setId(0);
         organizarLista();
+    }
+
+    /**
+     * Método de sistema que permite salvar os membros atuais em um arquivo.
+     * @param treeMembro
+     */
+    private void salvarDados(Set<Membro> treeMembro){
+        int id = 1;
+        while (idExistenteTree(id)){
+            id++;
+        }
+        switch (treeMembro.stream().findFirst().get().getFuncao()){
+            case BIG_BROTHERS:
+                colocarMembroTree(
+                        treeMembro.stream().findFirst().get().getId(),
+                        treeMembro.stream().findFirst().get().getNome(),
+                        treeMembro.stream().findFirst().get().geteMail(),
+                        0
+                );
+                break;
+            case SCRIPT_GUYS:
+                colocarMembroTree(
+                        treeMembro.stream().findFirst().get().getId(),
+                        treeMembro.stream().findFirst().get().getNome(),
+                        treeMembro.stream().findFirst().get().geteMail(),
+                        1
+                );
+                break;
+            case HEAVY_LIFTERS:
+                colocarMembroTree(
+                        treeMembro.stream().findFirst().get().getId(),
+                        treeMembro.stream().findFirst().get().getNome(),
+                        treeMembro.stream().findFirst().get().geteMail(),
+                        2
+                );
+                break;
+            case MOBILE_MEMBERS:
+                colocarMembroTree(
+                        treeMembro.stream().findFirst().get().getId(),
+                        treeMembro.stream().findFirst().get().getNome(),
+                        treeMembro.stream().findFirst().get().geteMail(),
+                        3
+                );
+                break;
+            default:
+                System.out.println("Erro na hora de salvar.");
+                break;
+        }
+
+
+        /*
+        int id = -1;
+        System.out.println("Digite seu ID (0 para sair): ");
+        id = scanner.nextInt();
+        while (idInexistenteTree(id)){
+            if(id == 0){
+                return;
+            }
+            System.out.println("ID invalido, talvez queira voltar ao menu(0) e verificar a lista(6).");
+            System.out.println("Digite seu ID:");
+            id = scanner.nextInt();
+        }
+
+        if(id == 0){
+            return;
+        }
+        treeMembro.stream().findFirst().get().setId(id);
+        LeituraArquivoMembro.salvar(treeMembro,this.file);*/
     }
 
     /**
