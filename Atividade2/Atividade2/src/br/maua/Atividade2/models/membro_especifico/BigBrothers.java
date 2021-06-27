@@ -1,12 +1,13 @@
-package br.maua.Atividade2.models;
+package br.maua.Atividade2.models.membro_especifico;
 
 import br.maua.Atividade2.controlador.SistemaHorario;
 import br.maua.Atividade2.enums.TiposMembros;
+import br.maua.Atividade2.models.membro_generico.Membro;
 
 /**
- * Classe para representar os membros HeavyLifters
+ * Classe que reprensenta os membros BigBrothers.
  */
-public class HeavyLifters extends Membro{
+public class BigBrothers extends Membro {
 
     /**
      * Construtor da classe, recebe id do usuário, nome do usuário e eMail do usuário.
@@ -14,8 +15,8 @@ public class HeavyLifters extends Membro{
      * @param eMail E-mail do usuário HeavyLifters
      * @param id ID do usuário HeavyLifters
      */
-    public HeavyLifters(String nome, String eMail, int id) {
-        super(nome, eMail, TiposMembros.HEAVY_LIFTERS, id);
+    public BigBrothers(String nome, String eMail, int id){
+        super(nome, eMail, TiposMembros.BIG_BROTHERS, id);
     }
 
     /**
@@ -25,10 +26,10 @@ public class HeavyLifters extends Membro{
     @Override
     public void assinaMensagem(SistemaHorario horario) {
         if (horario.horarioEhNormal()){
-            System.out.println("Podem contar conosco!");
+            System.out.println("Sempre ajudando as pessoas membros ou não S2!");
         }
         else {
-            System.out.println("N00b_qu3_n_Se_r3pita.bat");
+            System.out.println("...");
         }
     }
 }

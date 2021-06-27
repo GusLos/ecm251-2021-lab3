@@ -1,12 +1,13 @@
-package br.maua.Atividade2.models;
+package br.maua.Atividade2.models.membro_especifico;
 
 import br.maua.Atividade2.controlador.SistemaHorario;
 import br.maua.Atividade2.enums.TiposMembros;
+import br.maua.Atividade2.models.membro_generico.Membro;
 
 /**
- * Classe que reprensenta os membros ScriptGuys.
+ * Classe que reprensenta os membros MobileMembers.
  */
-public class ScriptGuys extends Membro{
+public class MobileMembers extends Membro {
 
     /**
      * Construtor da classe, recebe id do usuário, nome do usuário e eMail do usuário.
@@ -14,8 +15,8 @@ public class ScriptGuys extends Membro{
      * @param eMail E-mail do usuário HeavyLifters
      * @param id ID do usuário HeavyLifters
      */
-    public ScriptGuys(String nome, String eMail, int id) {
-        super(nome, eMail, TiposMembros.SCRIPT_GUYS, id);
+    public MobileMembers(String nome, String eMail, int id) {
+        super(nome, eMail, TiposMembros.MOBILE_MEMBERS, id);
     }
 
     /**
@@ -25,10 +26,10 @@ public class ScriptGuys extends Membro{
     @Override
     public void assinaMensagem(SistemaHorario horario) {
         if (horario.horarioEhNormal()){
-            System.out.println("Prazer em ajudar novos amigos de código!");
+            System.out.println("Happy Coding!");
         }
         else {
-            System.out.println("QU3Ro_S3us_r3curs0s.py");
+            System.out.println("Happy_C0d1ng. Maskers");
         }
     }
 }

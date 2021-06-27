@@ -1,9 +1,12 @@
 package br.maua.Atividade2.controlador;
 
 import br.maua.Atividade2.enums.HorarioSistema;
-import br.maua.Atividade2.models.*;
+import br.maua.Atividade2.models.membro_generico.Membro;
+import br.maua.Atividade2.models.membro_especifico.BigBrothers;
+import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
+import br.maua.Atividade2.models.membro_especifico.MobileMembers;
+import br.maua.Atividade2.models.membro_especifico.ScriptGuys;
 
-import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package br.maua.Atividade2.models;
+package br.maua.Atividade2.models.membro_generico;
 
 import br.maua.Atividade2.controlador.SistemaHorario;
 import br.maua.Atividade2.enums.TiposMembros;
