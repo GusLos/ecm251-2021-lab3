@@ -49,8 +49,11 @@ public class TesteDrive {
         //System.out.println(treeMembros.stream().anyMatch(membro -> membro.getId() == 999));
         //System.out.println("-------------------------------------------");
         //System.out.println(treeMembros.stream().findFirst().get().apresentar());
-
+/*
         System.out.println(treeMembros.stream().anyMatch(membro -> membro.getId() == 999));
         treeMembros.stream().anyMatch(membro -> (membro.getId() == 0));
+
+ */     System.out.println("teste");
+        System.out.println(treeMembros.stream().noneMatch(membro -> membro.getId() == 47));
     }
 }
