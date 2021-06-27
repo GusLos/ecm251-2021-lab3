@@ -2,6 +2,7 @@ package br.maua.Atividade2.controlador;
 
 import br.maua.Atividade2.comparadores.ComparadorMembroId;
 import br.maua.Atividade2.enums.HorarioSistema;
+import br.maua.Atividade2.enums.TiposMembros;
 import br.maua.Atividade2.interacao_arquivo.LeituraArquivoMembro;
 import br.maua.Atividade2.models.membro_generico.Membro;
 import br.maua.Atividade2.models.membro_especifico.BigBrothers;
@@ -65,6 +66,7 @@ public class Sistema {
             analisarOpcao(opcao);
             if(opcao == 9){
                 opcao = 0;
+                sairSistema();
             }
         }
     }
@@ -205,7 +207,7 @@ public class Sistema {
         int novoFuncao = -1;
         System.out.println("Digite o ID do membro (0 para voltar): ");
         novoId = scanner.nextInt();
-        while (idInexistenteTree(novoId)){
+        while (idExistenteTree(novoId)){
             if(novoId == 0){
                 return;
             }
@@ -257,12 +259,39 @@ public class Sistema {
     }
 
     /**
+     * Método que coloca o membro no TreeSet<>.
+     * @param id int id do membro.
+     * @param nome String nome do membro.
+     * @param eMail String eMail do membro.
+     * @param funcao TiposMembros função do membro
+     */
+    private void colocarMembroTree(int id, String nome, String eMail, TiposMembros funcao){
+        switch (funcao){
+            case BIG_BROTHERS:
+                this.treeMembro.add(new BigBrothers(nome, eMail, id));
+                break;
+            case SCRIPT_GUYS:
+                this.treeMembro.add(new ScriptGuys(nome, eMail, id));
+                break;
+            case HEAVY_LIFTERS:
+                this.treeMembro.add(new HeavyLifters(nome, eMail, id));
+                break;
+            case MOBILE_MEMBERS:
+                this.treeMembro.add(new MobileMembers(nome, eMail, id));
+                break;
+            default:
+                System.out.println("Erro ao inserir dado");
+                break;
+        }
+    }
+
+    /**
      * Método para verificar se id é aceitavel para o caso de um sistema com TreeSet<>.
      * Se for aceitavel, significa que nenhum outro membro tem aquele id.
      * @param id int id que vai ser testado.
      * @return boolean true (não existe outro membro com esse id); false (já existe membro com id).
      */
-    public boolean idInexistenteTree(int id){
+    public boolean idExistenteTree(int id){
         boolean teste = treeMembro.stream().anyMatch(membro -> membro.getId() == id);
         return (id < 0) || (teste);
     }
@@ -273,9 +302,9 @@ public class Sistema {
      * @param id int id que vai ser testado.
      * @return boolean true (existe outro membro com esse id); false (não existe membro com id).
      */
-    public boolean idExistenteTree(int id){
-        boolean teste = treeMembro.stream().anyMatch(membro -> membro.getId() == id);
-        return (id < 0) || (!teste);
+    public boolean idInexistenteTree(int id){
+        boolean teste = treeMembro.stream().noneMatch(membro -> membro.getId() == id);
+        return (id < 0) || (teste);
     }
 
     /**
@@ -348,7 +377,7 @@ public class Sistema {
         int id = -1;
         System.out.println("Digite o ID membro (0 para sair): ");
         id = scanner.nextInt();
-        while (idExistenteTree(id)){
+        while (idInexistenteTree(id)){
             if(id == 0){
                 return;
             }
@@ -398,70 +427,22 @@ public class Sistema {
 
     /**
      * Método de sistema que permite salvar os membros atuais em um arquivo.
-     * @param treeMembro
+     * @param treeMembro Set<> (TreeSet) de Membro.
      */
     private void salvarDados(Set<Membro> treeMembro){
         int id = 1;
+        String nome = "";
+        String eMail = "";
+        TiposMembros funcao = null;
         while (idExistenteTree(id)){
             id++;
         }
-        switch (treeMembro.stream().findFirst().get().getFuncao()){
-            case BIG_BROTHERS:
-                colocarMembroTree(
-                        treeMembro.stream().findFirst().get().getId(),
-                        treeMembro.stream().findFirst().get().getNome(),
-                        treeMembro.stream().findFirst().get().geteMail(),
-                        0
-                );
-                break;
-            case SCRIPT_GUYS:
-                colocarMembroTree(
-                        treeMembro.stream().findFirst().get().getId(),
-                        treeMembro.stream().findFirst().get().getNome(),
-                        treeMembro.stream().findFirst().get().geteMail(),
-                        1
-                );
-                break;
-            case HEAVY_LIFTERS:
-                colocarMembroTree(
-                        treeMembro.stream().findFirst().get().getId(),
-                        treeMembro.stream().findFirst().get().getNome(),
-                        treeMembro.stream().findFirst().get().geteMail(),
-                        2
-                );
-                break;
-            case MOBILE_MEMBERS:
-                colocarMembroTree(
-                        treeMembro.stream().findFirst().get().getId(),
-                        treeMembro.stream().findFirst().get().getNome(),
-                        treeMembro.stream().findFirst().get().geteMail(),
-                        3
-                );
-                break;
-            default:
-                System.out.println("Erro na hora de salvar.");
-                break;
-        }
-
-
-        /*
-        int id = -1;
-        System.out.println("Digite seu ID (0 para sair): ");
-        id = scanner.nextInt();
-        while (idInexistenteTree(id)){
-            if(id == 0){
-                return;
-            }
-            System.out.println("ID invalido, talvez queira voltar ao menu(0) e verificar a lista(6).");
-            System.out.println("Digite seu ID:");
-            id = scanner.nextInt();
-        }
-
-        if(id == 0){
-            return;
-        }
-        treeMembro.stream().findFirst().get().setId(id);
-        LeituraArquivoMembro.salvar(treeMembro,this.file);*/
+        nome = treeMembro.stream().findFirst().get().getNome();
+        eMail = treeMembro.stream().findFirst().get().geteMail();
+        funcao = treeMembro.stream().findFirst().get().getFuncao();
+        treeMembro.removeIf(membro -> membro.getId() == 0);
+        colocarMembroTree(id, nome, eMail, funcao);
+        LeituraArquivoMembro.salvar(this.treeMembro,this.file);
     }
 
     /**
