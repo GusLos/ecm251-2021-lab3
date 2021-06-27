@@ -126,10 +126,10 @@ public class Sistema {
                 relatorio(this.treeMembro);
                 break;
             case 7:
-                postarMensagensMembros();
+                postarMensagensMembros(this.treeMembro);
                 break;
             case 8:
-                removerMembro();
+                removerMembro(treeMembro);
                 break;
             case 9:
                 salvarDados();
@@ -202,7 +202,7 @@ public class Sistema {
         int novoFuncao = -1;
         System.out.println("Digite o ID do membro (0 para voltar): ");
         novoId = scanner.nextInt();
-        while (idAceitavelTree(novoId)){
+        while (idInexistenteTree(novoId)){
             if(novoId == 0){
                 return;
             }
@@ -259,18 +259,41 @@ public class Sistema {
      * @param id int id que vai ser testado.
      * @return boolean true (não existe outro membro com esse id); false (já existe membro com id).
      */
-    public boolean idAceitavelTree(int id){
+    public boolean idInexistenteTree(int id){
         boolean teste = treeMembro.stream().anyMatch(membro -> membro.getId() == id);
         return (id < 0) || (teste);
     }
 
     /**
+     * Método para verificar se id é aceitavel para o caso de um sistema com TreeSet<>.
+     * Se for aceitavel, significa que existe um membro com aquele id.
+     * @param id int id que vai ser testado.
+     * @return boolean true (existe outro membro com esse id); false (não existe membro com id).
+     */
+    public boolean idExistenteTree(int id){
+        boolean teste = treeMembro.stream().anyMatch(membro -> membro.getId() == id);
+        return (id < 0) || (!teste);
+    }
+
+    /**
      * Método que permite todos os membros cadastrados (presentes em listaMembros)
      * postar/assinar a sua mensagem, de acordo com sua classe e método assinaMensagem().
+     * @param listaMembro LinkedList de Membro com membros do sistema.
      */
-    private void postarMensagensMembros(){
+    private void postarMensagensMembros(LinkedList<Membro> listaMembro){
         System.out.println();
         listaMembro.forEach(usuario -> usuario.assinaMensagem(horario));
+        System.out.println();
+    }
+
+    /**
+     * Método que permite todos os membros cadastrados (presentes em treeMembro)
+     * postar/assinar a sua mensagem, de acordo com sua classe e método assinaMensagem().
+     * @param treeMembro Set<> (TreeSet<>) de Membro com membros do sistema.
+     */
+    private void postarMensagensMembros(Set<Membro> treeMembro){
+        System.out.println();
+        treeMembro.forEach(usuario -> usuario.assinaMensagem(horario));
         System.out.println();
     }
 
@@ -296,8 +319,9 @@ public class Sistema {
 
     /**
      * Método que permite remover um membro cadastrado (presente na listaMembros).
+     * @param listaMembro LinkedList de Membro com membros atuais do sistema.
      */
-    private void removerMembro(){
+    private void removerMembro(LinkedList<Membro> listaMembro){
         int i = -1;
         System.out.println("ID do membro a ser removido, (0 para voltar):");
         i = scanner.nextInt();
@@ -311,6 +335,24 @@ public class Sistema {
             listaMembro.remove(i);
             organizarLista();
         }
+    }
+
+    /**
+     * Método permite apagar um membro do sistema em um TreeSet.
+     * @param treeMembro Set<> (TreeSet) de Membro.
+     */
+    private void removerMembro(Set<Membro> treeMembro){
+        int id = -1;
+        while (idExistenteTree(id)){
+            System.out.println("ID invalido, talvez queira voltar ao menu(0) e verificar a lista(6).");
+            System.out.println("Digite o ID membro: ");
+            id = scanner.nextInt();
+            if(id == 0){
+                return;
+            }
+        }
+        int finalId = id;
+        treeMembro.removeIf(membro -> (membro.getId() == finalId));
     }
 
     /**
