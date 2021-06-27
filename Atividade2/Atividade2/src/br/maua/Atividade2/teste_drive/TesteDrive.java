@@ -36,10 +36,18 @@ public class TesteDrive {
             id = 0;
         }
         System.out.println(id);
-        */
+
         System.out.println("-------------------------------------------");
         membros.remove(1);
         membros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
         System.out.println("-------------------------------------------");
+        */
+        //organizar id's
+
+        for (int quant = 0; quant < membros.size(); quant++){
+            membros.get(quant).setId(quant);
+        }
+        System.out.println("-------------------------------------------");
+        membros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
     }
 }

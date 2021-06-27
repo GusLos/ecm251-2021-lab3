@@ -199,6 +199,16 @@ public class Sistema {
         }
         if(i != 0){
             listaMembro.remove(i);
+            organizarLista();
+        }
+    }
+
+    /**
+     * Método que permite organizar a listaMembros.
+     */
+    private void organizarLista(){
+        for (int x = 0; x < listaMembro.size(); x++){
+            listaMembro.get(x).setId(x);
         }
     }
 

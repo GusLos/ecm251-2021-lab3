@@ -63,4 +63,11 @@ public class Membro implements PostarMensagem, Apresentacao {
         return this.id;
     }
 
+    /**
+     * Permite mudar o id do membro.
+     * @param id Int id membro.
+     */
+    public void setId(int id){
+        this.id = id;
+    }
 }
