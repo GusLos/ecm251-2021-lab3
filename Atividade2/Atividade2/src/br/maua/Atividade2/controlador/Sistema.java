@@ -97,7 +97,7 @@ public class Sistema {
                 mudarHorario();
                 break;
             case 3:
-                listaMembro.getFirst().assinaMensagem(horario);
+                membroAtualMensagem();
                 break;
             case 4:
                 System.out.println(listaMembro.getFirst().apresentar());
@@ -259,6 +259,22 @@ public class Sistema {
     private void mudarHorario(){
         horario.mudarHorario();
         System.out.println("Horario mudado com sucesso para: "+horario.horarioAtual());
+    }
+
+    /**
+     * Método que permite o membro atual/"logado" postar uma mensagem.
+     * @param listaMembro LinkedList<> listaMembro com membros atuais do sistema.
+     */
+    private void membroAtualMensagem(LinkedList<Membro> listaMembro){
+        listaMembro.getFirst().assinaMensagem(this.horario);
+    }
+
+    /**
+     * Método que permite o membro atual/"logado" postar uma mensagem.
+     * @param treeMembro Set<> (TreeSet<>) treeMembro com membros atuais do sistema.
+     */
+    private void membroAtualMensagem(Set<Membro> treeMembro){
+        treeMembro.stream().findFirst().get().assinaMensagem(this.horario);
     }
 
 }
