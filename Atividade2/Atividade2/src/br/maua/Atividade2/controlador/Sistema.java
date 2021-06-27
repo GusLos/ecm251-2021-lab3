@@ -94,8 +94,7 @@ public class Sistema {
                 horarioAtual();
                 break;
             case 2:
-                horario.mudarHorario();
-                System.out.println("Horario mudado com sucesso para: "+horario.horarioAtual());
+                mudarHorario();
                 break;
             case 3:
                 listaMembro.getFirst().assinaMensagem(horario);
@@ -253,4 +252,13 @@ public class Sistema {
     private void horarioAtual(){
         System.out.println("Horario atual do sistema: "+horario.horarioAtual());
     }
+
+    /**
+     * Método permite o usuário mudar o horario do sistema.
+     */
+    private void mudarHorario(){
+        horario.mudarHorario();
+        System.out.println("Horario mudado com sucesso para: "+horario.horarioAtual());
+    }
+
 }
