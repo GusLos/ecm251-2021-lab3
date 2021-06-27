@@ -1,7 +1,7 @@
 package br.maua.Atividade2.controlador;
 
 import br.maua.Atividade2.enums.HorarioSistema;
-import br.maua.Atividade2.models.LeituraArquivoMembro;
+import br.maua.Atividade2.interacao_arquivo.LeituraArquivoMembro;
 import br.maua.Atividade2.models.membro_generico.Membro;
 import br.maua.Atividade2.models.membro_especifico.BigBrothers;
 import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
@@ -86,7 +86,7 @@ public class Sistema {
     private void analisarOpcao(int opcao){
         switch (opcao){
             case 0:
-                System.out.println("Se cuida, até mais.");
+                sairSistema();
                 break;
             case 1:
                 System.out.println("Horario atual do sistema: "+horario.horarioAtual());
@@ -219,4 +219,15 @@ public class Sistema {
         }
     }
 
+    /**
+     * Método chamado para realizar ultima ação do sistema (mandar uma mensagem de despedida).
+     */
+    private void sairSistema(){
+        if(horario.horarioEhNormal()) {
+            System.out.println("Se cuida, até mais.");
+        }
+        else{
+            System.out.println("Já vai tarde.");
+        }
+    }
 }

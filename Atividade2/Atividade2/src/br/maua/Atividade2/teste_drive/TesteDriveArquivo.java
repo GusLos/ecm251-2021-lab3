@@ -2,15 +2,11 @@ package br.maua.Atividade2.teste_drive;
 
 import br.maua.Atividade2.controlador.SistemaHorario;
 import br.maua.Atividade2.enums.HorarioSistema;
-import br.maua.Atividade2.models.LeituraArquivoMembro;
+import br.maua.Atividade2.interacao_arquivo.LeituraArquivoMembro;
 import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
 import br.maua.Atividade2.models.membro_generico.Membro;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
 
 public class TesteDriveArquivo {
     public static void main(String[] args){

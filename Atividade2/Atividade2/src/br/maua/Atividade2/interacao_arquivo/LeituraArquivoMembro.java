@@ -1,4 +1,4 @@
-package br.maua.Atividade2.models;
+package br.maua.Atividade2.interacao_arquivo;
 
 import br.maua.Atividade2.enums.TiposMembros;
 import br.maua.Atividade2.models.membro_especifico.BigBrothers;
