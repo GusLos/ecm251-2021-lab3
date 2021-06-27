@@ -1,18 +1,12 @@
 package br.maua.Atividade2.teste_drive;
 
 import br.maua.Atividade2.enums.TiposMembros;
+import br.maua.Atividade2.models.membro_generico.Membro;
 
-public class Item {
-    final public String nome;
-    final public int id;
-    final public String eMail;
-    final public TiposMembros tipo;
+public class Item extends Membro {
 
     public Item(int id, String nome, String eMail, TiposMembros tipo){
-        this.nome = nome;
-        this.id = id;
-        this.eMail = eMail;
-        this.tipo = tipo;
+        super(nome,eMail,tipo,id);
     }
 
     @Override
@@ -21,7 +15,7 @@ public class Item {
                 "nome='"+ this.nome + '\''+
                 ", id="+this.id+'\''+
                 ", eMail='"+this.eMail+'\''+
-                ", tipo='"+this.tipo+'}';
+                ", tipo='"+this.funcao+'}';
     }
 
     /**
@@ -29,7 +23,7 @@ public class Item {
      * @param dados String com os valores necessario
      * @return Uma instancia de item
      */
-    public static Item pegaItem(String dados){
+    public static Item pegaMembro(String dados){
         return new Item(Integer.parseInt(dados.split(";")[0]),
                 dados.split(";")[1],
                 dados.split(";")[2],

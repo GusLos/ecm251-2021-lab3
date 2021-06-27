@@ -19,6 +19,7 @@ public class Sistema {
     private static SistemaHorario horario;
     private Scanner scanner;
     private LinkedList<Membro> listaMembro;
+    private final String file = "arquivo_super_Secreto_nao_abrir.csv";
 
     /**
      * Construtor de sistema, prepara a classe sistema para ser utilizada.
@@ -34,9 +35,9 @@ public class Sistema {
      */
     public void run(){
         int opcao = 1;
-        String file = "arquivo_super_Secreto_nao_abrir.csv";
         registrarMembro();
-        LeituraArquivoMembro.lerArquivo(file,listaMembro);
+        LeituraArquivoMembro.lerArquivo(this.file,listaMembro);
+        System.out.println("Bem vindo\t\t\t\tHorario atual: "+horario.horarioAtual());
         while(opcao != 0){
             //try{
             opcao = menu();
@@ -54,7 +55,6 @@ public class Sistema {
      */
     private int menu(){
         int opcao = 1;
-        System.out.println("Bem vindo\t\t\t\tHorario atual: "+horario.horarioAtual());
         System.out.println();
         System.out.println("Escolha sua ação:");
         System.out.println("0 - Sair do sistema;");
@@ -68,6 +68,7 @@ public class Sistema {
         System.out.println("6 - Visualizar todos os membros cadastrados (Relatorio);");
         System.out.println("7 - Visualizar mensagem de todos os membros cadastrados;");
         System.out.println("8 - Remover um membro;");
+        System.out.println("9 - Salvar membros atuais em um arquivo;");
 
         //try{
         opcao = scanner.nextInt();
@@ -112,6 +113,9 @@ public class Sistema {
                 break;
             case 8:
                 removerMembro();
+                break;
+            case 9:
+                salvarDados();
                 break;
             default:
                 System.out.println("Opção invalida.");
@@ -229,5 +233,16 @@ public class Sistema {
         else{
             System.out.println("Já vai tarde.");
         }
+    }
+
+    /**
+     * Método de sistema que permite salvar os membros atuais em um arquivo.
+     */
+    private void salvarDados(){
+        organizarLista();
+        listaMembro.getFirst().setId(listaMembro.getLast().getId()+1);
+        LeituraArquivoMembro.salvar(listaMembro,this.file);
+        listaMembro.getLast().setId(0);
+        organizarLista();
     }
 }
