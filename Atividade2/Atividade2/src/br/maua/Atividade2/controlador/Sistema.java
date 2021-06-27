@@ -120,6 +120,7 @@ public class Sistema {
      * marcado com id = 0 e será o primeiro da lista listaMembros.
      */
     private void registrarMembro(){
+        organizarLista();
         String nomeMembroNovo = "";
         String eMailMembroNovo = "";
         int tipoMembro = -1;
