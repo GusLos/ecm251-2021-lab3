@@ -25,7 +25,7 @@ public class Sistema {
      * Construtor de sistema, prepara a classe sistema para ser utilizada.
      */
     public Sistema(){
-        //this.listaMembro = new LinkedList<>();
+        this.listaMembro = new LinkedList<>();
         this.treeMembro = new TreeSet<>(new ComparadorMembroId());
         this.horario = new SistemaHorario(HorarioSistema.NORMAL);
         this.scanner = new Scanner(System.in);
@@ -53,7 +53,7 @@ public class Sistema {
             funcao = scanner.nextInt();
         }
         colocarMembroTree(0,nome,eMail,funcao);
-        LeituraArquivoMembro.lerArquivo(this.file,treeMembro);
+        LeituraArquivoMembro.lerArquivo(this.file,this.treeMembro);
         System.out.println("Bem vindo\t\t\t\tHorario atual: "+horario.horarioAtual());
         while(opcao != 0){
             //try{
@@ -123,7 +123,7 @@ public class Sistema {
                 registrarMembroTree();
                 break;
             case 6:
-                relatorio();
+                relatorio(this.treeMembro);
                 break;
             case 7:
                 postarMensagensMembros();
@@ -196,36 +196,34 @@ public class Sistema {
      * utiliza colocarMembroTree.
      */
     private void registrarMembroTree(){
-        int id = -1;
-        String nome = "";
-        String eMail = "";
-        int funcao = -1;
+        int novoId = -1;
+        String novoNome = "";
+        String novoEMail = "";
+        int novoFuncao = -1;
         System.out.println("Digite o ID do membro (0 para voltar): ");
-        id = scanner.nextInt();
-        while (idAceitavelTree(id)){
+        novoId = scanner.nextInt();
+        while (idAceitavelTree(novoId)){
+            if(novoId == 0){
+                return;
+            }
             System.out.println("ID invalido, talvez queira voltar ao menu(0) e verificar a lista(6).");
             System.out.println("Digite o ID do novo membro: ");
-            id = scanner.nextInt();
+            novoId = scanner.nextInt();
         }
-        if (id == 0){
-            return;
-        }
-        else{
-            System.out.println("Digite o nome: ");
-            nome = scanner.next();
-            System.out.println("Digite o e-mail: ");
-            eMail = scanner.next();
-            System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
+        System.out.println("Digite o nome: ");
+        novoNome = scanner.next();
+        System.out.println("Digite o e-mail: ");
+        novoEMail = scanner.next();
+        System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
                     "3 - Mobile Member");
-            funcao = scanner.nextInt();
-            while((funcao < 0) || (funcao > 3)){
-                System.out.println("Número invalido.");
-                System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
+        novoFuncao = scanner.nextInt();
+        while((novoFuncao < 0) || (novoFuncao > 3)){
+            System.out.println("Número invalido.");
+            System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
                         "3 - Mobile Member");
-                funcao = scanner.nextInt();
-            }
-            colocarMembroTree(id, nome, eMail, funcao);
+            novoFuncao = scanner.nextInt();
         }
+        colocarMembroTree(novoId, novoNome, novoEMail, novoFuncao);
     }
 
     /**
@@ -239,16 +237,16 @@ public class Sistema {
     private void colocarMembroTree(int id, String nome, String eMail, int funcao){
         switch (funcao){
             case 0:
-                treeMembro.add(new BigBrothers(nome, eMail, id));
+                this.treeMembro.add(new BigBrothers(nome, eMail, id));
                 break;
             case 1:
-                treeMembro.add(new ScriptGuys(nome, eMail, id));
+                this.treeMembro.add(new ScriptGuys(nome, eMail, id));
                 break;
             case 2:
-                treeMembro.add(new HeavyLifters(nome, eMail, id));
+                this.treeMembro.add(new HeavyLifters(nome, eMail, id));
                 break;
             case 3:
-                treeMembro.add(new MobileMembers(nome, eMail, id));
+                this.treeMembro.add(new MobileMembers(nome, eMail, id));
                 break;
             default:
                 break;
@@ -277,13 +275,22 @@ public class Sistema {
     }
 
     /**
-     * Esse método mostra todos os membros que estão cadastrados no sistema
-     * (membros presentes em listaMembro).
-     * Faz uso do método apresentacao() de Membro.
+     * Método permite que todos os membros em uma LinkedList se apresentem.
+     * @param listaMembro LinkedList<> de Membro com membros do sistema.
      */
-    private void relatorio(){
+    private void relatorio(LinkedList<Membro> listaMembro){
         System.out.println();
-        this.listaMembro.forEach(usuario -> System.out.println(usuario.apresentar()));
+        listaMembro.forEach(usuario -> System.out.println(usuario.apresentar()));
+        System.out.println();
+    }
+
+    /**
+     * Método permite que todos os membros em uma Set (TreeSet) se apresentem.
+     * @param treeMembro TreeSet<> de Membro com membros do sistema.
+     */
+    private void relatorio(Set<Membro> treeMembro){
+        System.out.println();
+        this.treeMembro.forEach(usuario -> System.out.println(usuario.apresentar()));
         System.out.println();
     }
 
