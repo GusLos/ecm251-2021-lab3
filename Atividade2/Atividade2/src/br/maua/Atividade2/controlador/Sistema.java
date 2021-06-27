@@ -1,5 +1,6 @@
 package br.maua.Atividade2.controlador;
 
+import br.maua.Atividade2.comparadores.ComparadorMembroId;
 import br.maua.Atividade2.enums.HorarioSistema;
 import br.maua.Atividade2.interacao_arquivo.LeituraArquivoMembro;
 import br.maua.Atividade2.models.membro_generico.Membro;
@@ -8,9 +9,7 @@ import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
 import br.maua.Atividade2.models.membro_especifico.MobileMembers;
 import br.maua.Atividade2.models.membro_especifico.ScriptGuys;
 
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Classe que faz todas as interações.
@@ -18,6 +17,7 @@ import java.util.Scanner;
 public class Sistema {
     private static SistemaHorario horario;
     private Scanner scanner;
+    private Set<Membro> treeMembro;
     private LinkedList<Membro> listaMembro;
     private final String file = "arquivo_super_Secreto_nao_abrir.csv";
 
@@ -26,6 +26,7 @@ public class Sistema {
      */
     public Sistema(){
         this.listaMembro = new LinkedList<>();
+        this.treeMembro = new TreeSet<>(new ComparadorMembroId());
         this.horario = new SistemaHorario(HorarioSistema.NORMAL);
         this.scanner = new Scanner(System.in);
     }
@@ -36,7 +37,7 @@ public class Sistema {
     public void run(){
         int opcao = 1;
         registrarMembro();
-        LeituraArquivoMembro.lerArquivo(this.file,listaMembro);
+        LeituraArquivoMembro.lerArquivo(this.file,treeMembro);
         System.out.println("Bem vindo\t\t\t\tHorario atual: "+horario.horarioAtual());
         while(opcao != 0){
             //try{
@@ -90,7 +91,7 @@ public class Sistema {
                 sairSistema();
                 break;
             case 1:
-                System.out.println("Horario atual do sistema: "+horario.horarioAtual());
+                horarioAtual();
                 break;
             case 2:
                 horario.mudarHorario();
@@ -244,5 +245,12 @@ public class Sistema {
         LeituraArquivoMembro.salvar(listaMembro,this.file);
         listaMembro.getLast().setId(0);
         organizarLista();
+    }
+
+    /**
+     * Método que permite usuário ver o horario atual do sistema.
+     */
+    private void horarioAtual(){
+        System.out.println("Horario atual do sistema: "+horario.horarioAtual());
     }
 }

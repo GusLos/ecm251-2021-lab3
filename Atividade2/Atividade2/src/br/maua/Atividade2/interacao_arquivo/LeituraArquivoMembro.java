@@ -23,16 +23,16 @@ public class LeituraArquivoMembro {
      * Método que carrega os dados do arquivo localizado em localArquivo para a lista ligada
      * membros.
      * @param localArquivo String com o local do arquivo a ser carregado;
-     * @param membros Lista ligada de Membro que vai receber os dados do arquivo;
+     * @param listaMembros Lista ligada de Membro que vai receber os dados do arquivo;
      */
-    public static void lerArquivo(String localArquivo, LinkedList<Membro> membros){
+    public static void lerArquivo(String localArquivo, LinkedList<Membro> listaMembros){
         //"arquivo_super_Secreto_nao_abrir.csv"
         File file = new File(localArquivo);
         try{
             Scanner scanner = new Scanner(file);
             while(scanner.hasNext()){
                 String linha = scanner.nextLine();
-                membros.add(LeituraArquivoMembro.pegarMembro(linha));
+                listaMembros.add(LeituraArquivoMembro.pegarMembro(linha));
             }
         }
         catch (Exception exception){
