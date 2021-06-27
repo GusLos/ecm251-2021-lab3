@@ -9,6 +9,8 @@ import br.maua.Atividade2.models.membro_especifico.MobileMembers;
 import br.maua.Atividade2.models.membro_especifico.ScriptGuys;
 
 import java.util.LinkedList;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Classe para testar ideias antes de implementar.
@@ -17,40 +19,21 @@ public class TesteDrive {
     public static void main(String[] args){
         SistemaHorario horario = new SistemaHorario(HorarioSistema.EXTRA);
         LinkedList<Membro> membros = new LinkedList<>();
+        Set<Membro> treeMembros = new TreeSet<>(new ComparadorItem());
 
 
-        membros.add(new HeavyLifters("Max","Max@gmail.com", 01));
-        membros.add(new ScriptGuys("Mel","Mel@gmail.com", 02));
-        membros.add(new MobileMembers("Stella","Stella@gmail.com",03));
-        membros.add(new BigBrothers("G","G@M.com",05));
+        treeMembros.add(new HeavyLifters("Max","Max@gmail.com", 01));
+        treeMembros.add(new ScriptGuys("Mel","Mel@gmail.com", 43));
+        treeMembros.add(new MobileMembers("Stella","Stella@gmail.com",27));
+        treeMembros.add(new BigBrothers("G","G@M.com",05));
 
 
         System.out.println("-------------------------------------------");
         System.out.println("Passando por lista ligada");
-        membros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
+        treeMembros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
         System.out.println("-------------------------------------------");
-        membros.forEach(pessoa -> pessoa.assinaMensagem(horario));
-        /*
-        int id = 0;
-        try{
-            id = membros.getFirst().getId();
-        }
-        catch(NoSuchElementException e){
-            id = 0;
-        }
-        System.out.println(id);
+        treeMembros.forEach(pessoa -> pessoa.assinaMensagem(horario));
 
-        System.out.println("-------------------------------------------");
-        membros.remove(1);
-        membros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
-        System.out.println("-------------------------------------------");
-        */
-        //organizar id's
-
-        for (int quant = 0; quant < membros.size(); quant++){
-            membros.get(quant).setId(quant);
-        }
-        System.out.println("-------------------------------------------");
-        membros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
+        System.out.println(treeMembros.size());
     }
 }
