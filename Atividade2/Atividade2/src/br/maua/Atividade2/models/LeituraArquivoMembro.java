@@ -1,11 +1,14 @@
 package br.maua.Atividade2.models;
 
 import br.maua.Atividade2.enums.TiposMembros;
+import br.maua.Atividade2.models.membro_especifico.BigBrothers;
+import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
+import br.maua.Atividade2.models.membro_especifico.MobileMembers;
+import br.maua.Atividade2.models.membro_especifico.ScriptGuys;
 import br.maua.Atividade2.models.membro_generico.Membro;
 
 import java.io.File;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -40,12 +43,31 @@ public class LeituraArquivoMembro {
     /**
      * Método que separa as linhas em 2 (duas) String, um Int e um TiposMembros.
      * @param linha String de linha que (normalmente) vem de um arquivo para separar os ';';
-     * @return Uma instancia de Membro.
+     * @return Uma instancia da classe específica de acordo com TipoMembros na linha.
      */
     private static Membro pegarMembro(String linha){
-        return new Membro(linha.split(";")[1],
-                linha.split(";")[2],
-                TiposMembros.valueOf(linha.split(";")[3]),
-                Integer.parseInt(linha.split(";")[0]));
+        switch (TiposMembros.valueOf(linha.split(";")[3])){
+            case BIG_BROTHERS:
+                return new BigBrothers(linha.split(";")[1],
+                        linha.split(";")[2],
+                        Integer.parseInt(linha.split(";")[0]));
+            case SCRIPT_GUYS:
+                return new ScriptGuys(linha.split(";")[1],
+                        linha.split(";")[2],
+                        Integer.parseInt(linha.split(";")[0]));
+            case HEAVY_LIFTERS:
+                return new HeavyLifters(linha.split(";")[1],
+                        linha.split(";")[2],
+                        Integer.parseInt(linha.split(";")[0]));
+            case MOBILE_MEMBERS:
+                return new MobileMembers(linha.split(";")[1],
+                        linha.split(";")[2],
+                        Integer.parseInt(linha.split(";")[0]));
+            default:
+                return new Membro(linha.split(";")[1],
+                        linha.split(";")[2],
+                        TiposMembros.valueOf(linha.split(";")[3]),
+                        Integer.parseInt(linha.split(";")[0]));
+        }
     }
 }
