@@ -32,8 +32,23 @@ public class TesteDrive {
         System.out.println("Passando por lista ligada");
         treeMembros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
         System.out.println("-------------------------------------------");
-        treeMembros.forEach(pessoa -> pessoa.assinaMensagem(horario));
+        //treeMembros.forEach(pessoa -> pessoa.assinaMensagem(horario));
 
-        System.out.println(treeMembros.size());
+        //System.out.println(treeMembros.size());
+
+        /*
+        treeMembros.removeIf(membro -> (membro.getId() == 10));
+        System.out.println("-------------------------------------------");
+        treeMembros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
+        */
+        treeMembros.add(new BigBrothers("M","M@M.com",0));
+        treeMembros.add(new BigBrothers("S","S@S.com",0));
+        treeMembros.forEach(pessoa -> System.out.println(pessoa.apresentar()));
+
+        //System.out.println(treeMembros.stream().anyMatch(membro -> membro.getId() == 999));
+        //System.out.println("-------------------------------------------");
+        //System.out.println(treeMembros.stream().findFirst().get().apresentar());
+
+
     }
 }

@@ -7,6 +7,8 @@ import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
 import br.maua.Atividade2.models.membro_generico.Membro;
 
 import java.util.LinkedList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class TesteDriveArquivo {
     public static void main(String[] args){
@@ -14,11 +16,10 @@ public class TesteDriveArquivo {
         String file = "arquivo_super_Secreto_nao_abrir.csv";
         LinkedList<Membro> listaMembros = new LinkedList<>();
         SistemaHorario horario = new SistemaHorario(HorarioSistema.EXTRA);
+        Set<Membro> treeMembros = new TreeSet<>(new ComparadorItem());
 
 
-        //listaMembros = LeituraArquivoMembro.lerArquivo(file,listaMembros);
-
-        listaMembros.forEach(usuario -> System.out.println(usuario.apresentar()));
+        //listaMembros.forEach(usuario -> System.out.println(usuario.apresentar()));
 
 
         //realiza leitura do arquivo
@@ -41,7 +42,6 @@ public class TesteDriveArquivo {
         listaMembros.forEach(usuario -> System.out.println(usuario.apresentar()));
         //listaMembros.forEach(usuario -> usuario.assinaMensagem(horario));
 
-        LeituraArquivoMembro.salvar(listaMembros,localArquivo);
 
     }
 
