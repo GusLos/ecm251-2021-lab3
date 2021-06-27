@@ -43,7 +43,7 @@ public class Membro implements PostarMensagem, Apresentacao {
      */
     @Override
     public String apresentar() {
-        return "Usuario: "+ this.id+'-'+ this.nome + "("+ this.funcao +") e-mail: "+this.eMail ;
+        return "Usuario: "+ this.id+" - "+ this.nome + "("+ this.funcao +") e-mail: "+this.eMail ;
     }
 
     /**
@@ -61,6 +61,30 @@ public class Membro implements PostarMensagem, Apresentacao {
      */
     public int getId(){
         return this.id;
+    }
+
+    /**
+     * Método que permite pegar o nome do membro
+     * @return String nome do membro
+     */
+    public String getNome(){
+        return this.nome;
+    }
+
+    /**
+     * Método permite pegar o eMail do usuario
+     * @return String com eMail do membro
+     */
+    public String geteMail(){
+        return this.eMail;
+    }
+
+    /**
+     * Método permite pegar a função do membro
+     * @return TiposMembros do tipo de membro
+     */
+    public TiposMembros getFuncao(){
+        return this.funcao;
     }
 
     /**

@@ -36,7 +36,7 @@ public class Sistema {
         int opcao = 1;
         String file = "arquivo_super_Secreto_nao_abrir.csv";
         registrarMembro();
-        this.listaMembro = LeituraArquivoMembro.lerArquivo(file,listaMembro);
+        LeituraArquivoMembro.lerArquivo(file,listaMembro);
         while(opcao != 0){
             //try{
             opcao = menu();
