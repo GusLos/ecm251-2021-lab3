@@ -93,7 +93,7 @@ public class LeituraArquivoMembro {
     }
 
     /**
-     * Método permite salvar membros atuais no sistema (em listaMembro), em um arquivo no localArquivo.
+     * Método permite salvar membros atuais do sistema (em listaMembro), em um arquivo no localArquivo.
      * @param listaMembro Lista Ligada de Membro;
      * @param localArquivo String com o local/nome do arquivo.
      */
@@ -107,6 +107,26 @@ public class LeituraArquivoMembro {
                       membro.getFuncao()+'\n');
             }
         fileWrite.close();
+        } catch (Exception exception){
+            System.out.println("ERRO na hora de salvar arquivo!");
+        }
+    }
+
+    /**
+     * Método permite salvar membros atuais do sistema (em treeMembro), em um arquivo no localArquivo.
+     * @param treeMembro Set (TreeSet) de Membro.
+     * @param localArquivo String com o local/nome do arquivo.
+     */
+    public static void salvar(Set<Membro> treeMembro,String localArquivo){
+        try{
+            FileWriter fileWrite = new FileWriter(localArquivo);
+            for (Membro membro : treeMembro) {
+                fileWrite.append(membro.getId() + ";" +
+                        membro.getNome() + ';' +
+                        membro.geteMail() + ';' +
+                        membro.getFuncao()+'\n');
+            }
+            fileWrite.close();
         } catch (Exception exception){
             System.out.println("ERRO na hora de salvar arquivo!");
         }
