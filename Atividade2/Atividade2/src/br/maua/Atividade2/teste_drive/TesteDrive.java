@@ -1,5 +1,6 @@
 package br.maua.Atividade2.teste_drive;
 
+import br.maua.Atividade2.comparadores.ComparadorMembroId;
 import br.maua.Atividade2.controlador.SistemaHorario;
 import br.maua.Atividade2.enums.HorarioSistema;
 import br.maua.Atividade2.models.membro_generico.Membro;
@@ -19,7 +20,7 @@ public class TesteDrive {
     public static void main(String[] args){
         SistemaHorario horario = new SistemaHorario(HorarioSistema.EXTRA);
         LinkedList<Membro> membros = new LinkedList<>();
-        Set<Membro> treeMembros = new TreeSet<>(new ComparadorItem());
+        Set<Membro> treeMembros = new TreeSet<>(new ComparadorMembroId());
 
 
         treeMembros.add(new HeavyLifters("Max","Max@gmail.com", 01));

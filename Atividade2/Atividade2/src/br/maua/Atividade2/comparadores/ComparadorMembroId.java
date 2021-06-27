@@ -1,13 +1,13 @@
-package br.maua.Atividade2.teste_drive;
+package br.maua.Atividade2.comparadores;
 
 import br.maua.Atividade2.models.membro_generico.Membro;
 
 import java.util.Comparator;
 
 /**
- * Classe para ser utilizada por TreeSet para fazer a comparação.
+ * Classe para ser utilizada por TreeSet para fazer a comparação de ID dos Membros.
  */
-public class ComparadorItem implements Comparator<Membro> {
+public class ComparadorMembroId implements Comparator<Membro> {
 
     /**
      * Regra para comparação entre os Membros

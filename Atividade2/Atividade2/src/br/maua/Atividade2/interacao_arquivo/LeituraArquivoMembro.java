@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Classe que carrega dados do arquivo, sendo os dados membros por linha:
@@ -23,7 +24,6 @@ public class LeituraArquivoMembro {
      * membros.
      * @param localArquivo String com o local do arquivo a ser carregado;
      * @param membros Lista ligada de Membro que vai receber os dados do arquivo;
-     * @return Lista ligada de Membro com dados do arquivo;
      */
     public static void lerArquivo(String localArquivo, LinkedList<Membro> membros){
         //"arquivo_super_Secreto_nao_abrir.csv"
@@ -33,6 +33,27 @@ public class LeituraArquivoMembro {
             while(scanner.hasNext()){
                 String linha = scanner.nextLine();
                 membros.add(LeituraArquivoMembro.pegarMembro(linha));
+            }
+        }
+        catch (Exception exception){
+            System.out.println("Arquivo muito secreto para abrir ... (ou não existe).");
+        }
+    }
+
+    /**
+     * Método que carrega os dados do arquivo localizado em localArquivo para o 'TreeSet'
+     * treeMembros.
+     * @param localArquivo String com local do arquivo a ser carregado;
+     * @param treeMembros Set<> (TreeSet) treeMembros que vai receber os dados do arquivo;
+     */
+    public static void lerArquivo(String localArquivo, Set<Membro> treeMembros){
+        //"arquivo_super_Secreto_nao_abrir.csv"
+        File file = new File(localArquivo);
+        try{
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNext()){
+                String linha = scanner.nextLine();
+                treeMembros.add(LeituraArquivoMembro.pegarMembro(linha));
             }
         }
         catch (Exception exception){

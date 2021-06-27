@@ -1,9 +1,9 @@
 package br.maua.Atividade2.teste_drive;
 
+import br.maua.Atividade2.comparadores.ComparadorMembroId;
 import br.maua.Atividade2.controlador.SistemaHorario;
 import br.maua.Atividade2.enums.HorarioSistema;
 import br.maua.Atividade2.interacao_arquivo.LeituraArquivoMembro;
-import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
 import br.maua.Atividade2.models.membro_generico.Membro;
 
 import java.util.LinkedList;
@@ -16,31 +16,15 @@ public class TesteDriveArquivo {
         String file = "arquivo_super_Secreto_nao_abrir.csv";
         LinkedList<Membro> listaMembros = new LinkedList<>();
         SistemaHorario horario = new SistemaHorario(HorarioSistema.EXTRA);
-        Set<Membro> treeMembros = new TreeSet<>(new ComparadorItem());
+        Set<Membro> treeMembros = new TreeSet<>(new ComparadorMembroId());
 
 
-        //listaMembros.forEach(usuario -> System.out.println(usuario.apresentar()));
+        LeituraArquivoMembro.lerArquivo(file,treeMembros);
 
+        treeMembros.forEach(membro -> System.out.println(membro.apresentar()));
+        //System.out.println("-------------------------------------------");
+        //treeMembros.forEach(pessoa -> pessoa.assinaMensagem(horario));
 
-        //realiza leitura do arquivo
-        /*
-        try{
-            Scanner scanner = new Scanner(file);
-
-            while(scanner.hasNext()){
-                String linha = scanner.nextLine();
-                listaMembros.add(LeituraArquivoMembro.lerArquivo(linha));
-            }
-        }
-        catch (Exception exception){
-            System.out.println("Arquivo muito secreto para abrir ... (ou não existe).");
-        }
-        */
-        String localArquivo = "arquivo_super_Secreto_nao_abrir2.csv";
-        LeituraArquivoMembro.lerArquivo(file,listaMembros);
-        listaMembros.add(new HeavyLifters("M3l","mel324@hotmail.com",80));
-        listaMembros.forEach(usuario -> System.out.println(usuario.apresentar()));
-        //listaMembros.forEach(usuario -> usuario.assinaMensagem(horario));
 
 
     }
