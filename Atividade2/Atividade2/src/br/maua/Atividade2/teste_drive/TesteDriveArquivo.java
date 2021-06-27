@@ -15,7 +15,7 @@ public class TesteDriveArquivo {
         List<Membro> listaMembros = new ArrayList<>();
 
 
-        listaMembros = LeituraArquivoMembro.lerArquivo(file,listaMembros);
+        //listaMembros = LeituraArquivoMembro.lerArquivo(file,listaMembros);
 
         listaMembros.forEach(usuario -> System.out.println(usuario.apresentar()));
 

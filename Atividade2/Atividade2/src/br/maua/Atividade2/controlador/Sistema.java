@@ -1,6 +1,7 @@
 package br.maua.Atividade2.controlador;
 
 import br.maua.Atividade2.enums.HorarioSistema;
+import br.maua.Atividade2.models.LeituraArquivoMembro;
 import br.maua.Atividade2.models.membro_generico.Membro;
 import br.maua.Atividade2.models.membro_especifico.BigBrothers;
 import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
@@ -33,7 +34,9 @@ public class Sistema {
      */
     public void run(){
         int opcao = 1;
+        String file = "arquivo_super_Secreto_nao_abrir.csv";
         registrarMembro();
+        this.listaMembro = LeituraArquivoMembro.lerArquivo(file,listaMembro);
         while(opcao != 0){
             //try{
             opcao = menu();

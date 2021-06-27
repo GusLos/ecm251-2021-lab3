@@ -4,6 +4,7 @@ import br.maua.Atividade2.enums.TiposMembros;
 import br.maua.Atividade2.models.membro_generico.Membro;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class LeituraArquivoMembro {
      * @param membros Lista ligada de Membro que vai receber os dados do arquivo;
      * @return Lista ligada de Membro com dados do arquivo;
      */
-    public static List<Membro> lerArquivo(String localArquivo, List<Membro> membros){
+    public static LinkedList<Membro> lerArquivo(String localArquivo, LinkedList<Membro> membros){
         //"arquivo_super_Secreto_nao_abrir.csv"
         File file = new File(localArquivo);
         try{
