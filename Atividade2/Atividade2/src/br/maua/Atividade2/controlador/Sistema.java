@@ -97,10 +97,10 @@ public class Sistema {
                 mudarHorario();
                 break;
             case 3:
-                membroAtualMensagem();
+                membroAtualMensagem(this.treeMembro);
                 break;
             case 4:
-                System.out.println(listaMembro.getFirst().apresentar());
+                apresentacaoPessoal(this.treeMembro);
                 break;
             case 5:
                 registrarMembro();
@@ -277,4 +277,19 @@ public class Sistema {
         treeMembro.stream().findFirst().get().assinaMensagem(this.horario);
     }
 
+    /**
+     * Método que permite o usuario atual a se apresentar sozinho.
+     * @param listaMembro LinkedList<> Membro com lista de membros atuais do sistema.
+     */
+    private void apresentacaoPessoal(LinkedList<Membro> listaMembro){
+        System.out.println(listaMembro.getFirst().apresentar());
+    }
+
+    /**
+     * Método que permite o usuario atual a se apresentar sozinho.
+     * @param treeMembro Set<> Membro com TreeSet<> de membros atuais do sistema.
+     */
+    private void apresentacaoPessoal(Set<Membro> treeMembro){
+        System.out.println(treeMembro.stream().findFirst().get().apresentar());
+    }
 }
