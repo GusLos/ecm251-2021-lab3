@@ -25,7 +25,7 @@ public class Sistema {
      * Construtor de sistema, prepara a classe sistema para ser utilizada.
      */
     public Sistema(){
-        this.listaMembro = new LinkedList<>();
+        //this.listaMembro = new LinkedList<>();
         this.treeMembro = new TreeSet<>(new ComparadorMembroId());
         this.horario = new SistemaHorario(HorarioSistema.NORMAL);
         this.scanner = new Scanner(System.in);
@@ -36,7 +36,23 @@ public class Sistema {
      */
     public void run(){
         int opcao = 1;
-        registrarMembro();
+        String nome = "";
+        String eMail = "";
+        int funcao = -1;
+        System.out.println("Seu nome:");
+        nome = scanner.next();
+        System.out.println("Seu e-mail:");
+        eMail = scanner.next();
+        System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
+                "3 - Mobile Member");
+        funcao = scanner.nextInt();
+        while((funcao < 0) || (funcao > 3)){
+            System.out.println("Número invalido.");
+            System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
+                    "3 - Mobile Member");
+            funcao = scanner.nextInt();
+        }
+        colocarMembroTree(0,nome,eMail,funcao);
         LeituraArquivoMembro.lerArquivo(this.file,treeMembro);
         System.out.println("Bem vindo\t\t\t\tHorario atual: "+horario.horarioAtual());
         while(opcao != 0){
@@ -102,9 +118,9 @@ public class Sistema {
             case 4:
                 apresentacaoPessoal(this.treeMembro);
                 break;
-                //Voltar daqui!!--------------------------------------------------------------
             case 5:
-                registrarMembro();
+                //registrarMembroLista();
+                registrarMembroTree();
                 break;
             case 6:
                 relatorio();
@@ -130,7 +146,7 @@ public class Sistema {
      * "LogIn", onde o usuário que entrar no sistema e usar o sistema vai ser
      * marcado com id = 0 e será o primeiro da lista listaMembros.
      */
-    private void registrarMembro(){
+    private void registrarMembroLista(){
         organizarLista();
         String nomeMembroNovo = "";
         String eMailMembroNovo = "";
@@ -173,6 +189,81 @@ public class Sistema {
             default:
                 System.out.println("Erro!");
         }
+    }
+
+    /**
+     * Método que permite ao usuario cadastrar um membro novo (em um TreeSet),
+     * utiliza colocarMembroTree.
+     */
+    private void registrarMembroTree(){
+        int id = -1;
+        String nome = "";
+        String eMail = "";
+        int funcao = -1;
+        System.out.println("Digite o ID do membro (0 para voltar): ");
+        id = scanner.nextInt();
+        while (idAceitavelTree(id)){
+            System.out.println("ID invalido, talvez queira voltar ao menu(0) e verificar a lista(6).");
+            System.out.println("Digite o ID do novo membro: ");
+            id = scanner.nextInt();
+        }
+        if (id == 0){
+            return;
+        }
+        else{
+            System.out.println("Digite o nome: ");
+            nome = scanner.next();
+            System.out.println("Digite o e-mail: ");
+            eMail = scanner.next();
+            System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
+                    "3 - Mobile Member");
+            funcao = scanner.nextInt();
+            while((funcao < 0) || (funcao > 3)){
+                System.out.println("Número invalido.");
+                System.out.println("Tipo/Função do membro:\n0 - Big Brother\n1 - Script Guy\n2 - Heavy Lifter\n" +
+                        "3 - Mobile Member");
+                funcao = scanner.nextInt();
+            }
+            colocarMembroTree(id, nome, eMail, funcao);
+        }
+    }
+
+    /**
+     * Método que coloca o membro no TreeSet<>.
+     * @param id int id do membro.
+     * @param nome String nome do membro.
+     * @param eMail String eMail do membro.
+     * @param funcao int função do membro sendo: 0-BigBrothers; 1-ScriptGuys; 2-HeavyLifters;
+     *               3- MobileMembers.
+     */
+    private void colocarMembroTree(int id, String nome, String eMail, int funcao){
+        switch (funcao){
+            case 0:
+                treeMembro.add(new BigBrothers(nome, eMail, id));
+                break;
+            case 1:
+                treeMembro.add(new ScriptGuys(nome, eMail, id));
+                break;
+            case 2:
+                treeMembro.add(new HeavyLifters(nome, eMail, id));
+                break;
+            case 3:
+                treeMembro.add(new MobileMembers(nome, eMail, id));
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Método para verificar se id é aceitavel para o caso de um sistema com TreeSet<>.
+     * Se for aceitavel, significa que nenhum outro membro tem aquele id.
+     * @param id int id que vai ser testado.
+     * @return boolean true (não existe outro membro com esse id); false (já existe membro com id).
+     */
+    public boolean idAceitavelTree(int id){
+        boolean teste = treeMembro.stream().anyMatch(membro -> membro.getId() == id);
+        return (id < 0) || (teste);
     }
 
     /**
@@ -232,7 +323,7 @@ public class Sistema {
             System.out.println("Se cuida, até mais.");
         }
         else{
-            System.out.println("Já vai tarde.");
+            System.out.println("Já v@1 T@rD3.exe");
         }
     }
 

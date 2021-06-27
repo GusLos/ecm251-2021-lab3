@@ -50,6 +50,7 @@ public class TesteDrive {
         //System.out.println("-------------------------------------------");
         //System.out.println(treeMembros.stream().findFirst().get().apresentar());
 
-
+        System.out.println(treeMembros.stream().anyMatch(membro -> membro.getId() == 999));
+        treeMembros.stream().anyMatch(membro -> (membro.getId() == 0));
     }
 }
