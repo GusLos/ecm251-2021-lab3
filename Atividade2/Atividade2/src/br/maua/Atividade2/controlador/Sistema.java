@@ -64,7 +64,7 @@ public class Sistema {
             //    opcao = 999;
             //}
             analisarOpcao(opcao);
-            if(opcao == 9){
+            if(opcao == 1){
                 opcao = 0;
                 sairSistema();
             }
@@ -88,21 +88,28 @@ public class Sistema {
         System.out.println("6 - Visualizar todos os membros cadastrados (Relatorio);");
         System.out.println("7 - Visualizar mensagem de todos os membros cadastrados;");
 
-        if(treeMembro.stream().findFirst().get().getFuncao() == TiposMembros.BIG_BROTHERS){
+        if(atualEhBB(treeMembro)){
             System.out.println("8 - Adicionar membro;");
             System.out.println("9 - Remover um membro;");
+            opcao = scanner.nextInt();
+
         }
-
-
+        else{
+            opcao = scanner.nextInt();
+        }
         //try{
-        opcao = scanner.nextInt();
+        //opcao = scanner.nextInt();
         //}
         //catch (InputMismatchException e){
         //    System.out.println("Tu é cego ?");
         //    opcao = 999;
         //}
-
-        return opcao;
+        if(!atualEhBB(treeMembro) && ((opcao == 9) || (opcao == 8))){
+            return -1;
+        }
+        else{
+            return opcao;
+        }
     }
 
     /**
