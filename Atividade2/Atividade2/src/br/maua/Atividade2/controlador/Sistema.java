@@ -80,17 +80,19 @@ public class Sistema {
         System.out.println();
         System.out.println("Escolha sua ação:");
         System.out.println("0 - Sair do sistema;");
-        System.out.println("1 - Verificar horário atual;");
-        System.out.println("2 - Mudar horário atual;");
-        System.out.println("3 - Postar/Assinar mensagem;");
+        System.out.println("1 - Salvar dados e sair;");
+        System.out.println("2 - Verificar horário atual;");
+        System.out.println("3 - Mudar horário atual;");
         System.out.println("4 - Apresentar usuário atual;");
-        //fazer if usuario é big brother ?
-        System.out.println("5 - Adicionar membro;");
-        //
+        System.out.println("5 - Postar/Assinar mensagem (usuário atual);");
         System.out.println("6 - Visualizar todos os membros cadastrados (Relatorio);");
         System.out.println("7 - Visualizar mensagem de todos os membros cadastrados;");
-        System.out.println("8 - Remover um membro;");
-        System.out.println("9 - Salvar membros atuais em um arquivo e sair;");
+
+        if(treeMembro.stream().findFirst().get().getFuncao() == TiposMembros.BIG_BROTHERS){
+            System.out.println("8 - Adicionar membro;");
+            System.out.println("9 - Remover um membro;");
+        }
+
 
         //try{
         opcao = scanner.nextInt();
@@ -99,6 +101,7 @@ public class Sistema {
         //    System.out.println("Tu é cego ?");
         //    opcao = 999;
         //}
+
         return opcao;
     }
 
@@ -112,20 +115,19 @@ public class Sistema {
                 sairSistema();
                 break;
             case 1:
-                horarioAtual();
+                salvarDados(treeMembro);
                 break;
             case 2:
-                mudarHorario();
+                horarioAtual();
                 break;
             case 3:
-                membroAtualMensagem(this.treeMembro);
+                mudarHorario();
                 break;
             case 4:
                 apresentacaoPessoal(this.treeMembro);
                 break;
             case 5:
-                //registrarMembroLista();
-                registrarMembroTree();
+                membroAtualMensagem(this.treeMembro);
                 break;
             case 6:
                 relatorio(this.treeMembro);
@@ -134,10 +136,10 @@ public class Sistema {
                 postarMensagensMembros(this.treeMembro);
                 break;
             case 8:
-                removerMembro(treeMembro);
+                registrarMembroTree();
                 break;
             case 9:
-                salvarDados(treeMembro);
+                removerMembro(treeMembro);
                 break;
             default:
                 System.out.println("Opção invalida.");
@@ -490,5 +492,16 @@ public class Sistema {
      */
     private void apresentacaoPessoal(Set<Membro> treeMembro){
         System.out.println(treeMembro.stream().findFirst().get().apresentar());
+    }
+
+    /**
+     * Método verifica se o usuário atual é BigBrother.
+     * @param treeMembro Set<> (TreeSet) de Membro, onde o primeiro membro do TreeSet
+     *                   (0) é o usuario atual.
+     * @return boolean, onde: true - usuario (primeiro membro) é BigBrother;
+     * false - usuario (primeiro membro) não é BigBrother.
+     */
+    private boolean atualEhBB(Set<Membro> treeMembro){
+        return (treeMembro.stream().findFirst().get().getFuncao() == TiposMembros.BIG_BROTHERS);
     }
 }

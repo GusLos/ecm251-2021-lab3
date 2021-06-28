@@ -3,6 +3,7 @@ package br.maua.Atividade2.teste_drive;
 import br.maua.Atividade2.comparadores.ComparadorMembroId;
 import br.maua.Atividade2.controlador.SistemaHorario;
 import br.maua.Atividade2.enums.HorarioSistema;
+import br.maua.Atividade2.enums.TiposMembros;
 import br.maua.Atividade2.models.membro_generico.Membro;
 import br.maua.Atividade2.models.membro_especifico.BigBrothers;
 import br.maua.Atividade2.models.membro_especifico.HeavyLifters;
@@ -54,6 +55,6 @@ public class TesteDrive {
         treeMembros.stream().anyMatch(membro -> (membro.getId() == 0));
 
  */     System.out.println("teste");
-        System.out.println(treeMembros.stream().noneMatch(membro -> membro.getId() == 47));
+        System.out.println(treeMembros.stream().findFirst().get().getFuncao() == TiposMembros.BIG_BROTHERS);
     }
 }
